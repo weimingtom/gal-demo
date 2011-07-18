@@ -9,3 +9,4 @@
 #define LOG_FILE				"LogFile"
 
 #define CfgMgr					CConfigManager::GetInstance()
+#define Game					CGame::GetInstance()

@@ -1,8 +1,10 @@
 #pragma once
 
+template<class OwnerType>
 class CAction
 {
 public:
-	CAction(void);
-	virtual ~CAction(void);
+	virtual ~CAction(void){};
+
+	virtual BOOL execute(OwnerType *) = 0;
 };

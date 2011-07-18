@@ -190,7 +190,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DefaultAction.cpp"
+				RelativePath=".\DefaultGameState.cpp"
 				>
 			</File>
 			<File
@@ -202,7 +202,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameDefaultAction.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderableObject.cpp"
 				>
 			</File>
 			<File
@@ -248,7 +256,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DefaultAction.h"
+				RelativePath=".\DefaultGameState.h"
 				>
 			</File>
 			<File
@@ -257,6 +265,14 @@
 			</File>
 			<File
 				RelativePath=".\Game.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameDefaultAction.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderableObject.h"
 				>
 			</File>
 			<File

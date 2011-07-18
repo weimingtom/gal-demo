@@ -4,26 +4,29 @@
 #include "constdefines.h"
 #include "hge.h"
 #include "StateMachine.h"
+#include "DefaultGameState.h"
 
-CGame::CGame(void):m_hge(NULL)
+
+CGame::CGame(void):m_hge(NULL), m_fsm(NULL)
 {
+	m_fsm = new CStateMachine<CGame>(this);
+
+	m_fsm->SetCurrentState(CDefaultGameState::GetInstance());
 }
 
 CGame::~CGame(void)
 {
-
+	if (m_fsm)
+	{
+		delete m_fsm;
+		m_fsm = NULL;
+	}
 }
 
 CGame* CGame::GetInstance()
 {
 	static CGame instance;
 	return &instance;
-}
-
-BOOL CGame::Start()
-{
-	m_hge->System_Start();
-	return TRUE;
 }
 
 BOOL CGame::Initialize()
@@ -39,7 +42,7 @@ BOOL CGame::Initialize()
 
 	m_hge->System_SetState(HGE_LOGFILE, CfgMgr->GetLogFileName().c_str());
 	m_hge->System_SetState(HGE_TITLE, CfgMgr->GetWindowTitle().c_str());
-	
+
 	m_hge->System_SetState(HGE_FRAMEFUNC, &CGame::FrameFunc);
 	m_hge->System_SetState(HGE_RENDERFUNC, &CGame::RenderFunc);
 
@@ -51,7 +54,6 @@ BOOL CGame::Initialize()
 	return TRUE;
 }
 
-
 BOOL CGame::Finalize()
 {
 	CConfigManager::GetInstance()->Finalize();
@@ -62,18 +64,47 @@ BOOL CGame::Finalize()
 	return TRUE;
 }
 
+BOOL CGame::Start()
+{
+	m_hge->System_Start();
+	return TRUE;
+}
+
 BOOL CGame::RenderFunc()
 {
-
+	
 	return TRUE;
 }
 
 BOOL CGame::FrameFunc()
 {
-	if (CGame::GetInstance()->m_hge->Input_GetKeyState(HGEK_ESCAPE))
+	if (Game->Update())
 	{
 		return TRUE;
 	}
 	return FALSE;
+}
+
+void CGame::GetKeyInfo( KEY_INFO * kinfo, int keycode)
+{
+	if (keycode)
+	{
+		kinfo->keycode = keycode;
+		kinfo->down = m_hge->Input_KeyDown(keycode);
+		kinfo->up = m_hge->Input_KeyUp(keycode);
+		kinfo->keyname = m_hge->Input_GetKeyName(keycode);
+	}
+	kinfo->lastkeychar = m_hge->Input_GetChar();
+	kinfo->lastkeycode = m_hge->Input_GetKey();
+}
+
+BOOL CGame::GetCurrentKeyState( int keycode )
+{
+	return m_hge->Input_GetKeyState(keycode);
+}
+
+BOOL CGame::Update()
+{
+	return m_fsm->Update();
 }
 

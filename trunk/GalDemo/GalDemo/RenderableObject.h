@@ -1,10 +1,10 @@
 #pragma once
 
+template<class OwnerType>
 class CRenderableObject
 {
 public:
-	CRenderableObject(void);
-	virtual ~CRenderableObject(void);
+	virtual ~CRenderableObject(void){};
 
-	virtual void Render() = 0;
+	virtual void Render(OwnerType *) = 0;
 };

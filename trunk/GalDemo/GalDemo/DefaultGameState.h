@@ -1,12 +1,13 @@
 #pragma once
-#include "state.h"
+#include "GameState.h"
 #include <stack>
 
-template<class OwnerType> class CAction;
+class CAction;
 class CGame;
+class CQuad;
 
 class CDefaultGameState :
-	public CState<CGame>
+	public CGameState
 {
 public:
 	CDefaultGameState(void);
@@ -16,7 +17,9 @@ public:
 	virtual void Enter(CGame *);
 	virtual BOOL Execute(CGame *);
 	virtual void Exit(CGame *);
+	virtual BOOL Render(CGame *);
 
 protected:
-	std::stack<CAction<CGame> *>			m_actionStack;
+	std::stack<CAction *>	m_actionStack;
+	CQuad					*m_quad;
 };

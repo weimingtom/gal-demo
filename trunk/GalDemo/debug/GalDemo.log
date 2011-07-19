@@ -1,22 +1,20 @@
 HGE Started..
 
 HGE version: 1.80
-Date: 18.07.2011, 16:41:32
+Date: 20.07.2011, 00:40:09
 
 Application: GalDemo
-OS: Windows 5.1.2600
-Memory: 1047660K total, 357024K free
+OS: Windows 6.1.7601
+Memory: 2095148K total, 679848K free
 
-D3D Driver: nv4_disp.dll
-Description: NVIDIA GeForce 9400 GT 
-Version: 6.14.12.5931
+D3D Driver: nvd3dum.dll
+Description: NVIDIA GeForce 8600M GT 
+Version: 8.17.12.5896
 Mode: 640 x 480 x X8R8G8B8
 
-Sound Device: SoundMAX HD Audio O
+Sound Device: ÑïÉùÆ÷/¶ú»ú (SigmaTel High Definition Audio CODEC)
 Sample rate: 44100
 
 Init done.
 
-
-Finishing..
-The End.
+Can't load resource: test

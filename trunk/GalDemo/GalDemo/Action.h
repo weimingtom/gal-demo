@@ -1,10 +1,11 @@
 #pragma once
 
-template<class OwnerType>
+class CGame;
+
 class CAction
 {
 public:
 	virtual ~CAction(void){};
 
-	virtual BOOL execute(OwnerType *) = 0;
+	virtual BOOL execute(CGame *) = 0;
 };

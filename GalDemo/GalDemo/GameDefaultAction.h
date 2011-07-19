@@ -4,7 +4,7 @@
 class CGame;
 
 class CGameDefaultAction :
-	public CAction<CGame>
+	public CAction
 {
 public:
 	CGameDefaultAction(void);

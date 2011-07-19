@@ -3,15 +3,13 @@
 #include "ConfigManager.h"
 #include "constdefines.h"
 #include "hge.h"
-#include "StateMachine.h"
+#include "GameFSM.h"
 #include "DefaultGameState.h"
-
+#include "ResourceManager.h"
 
 CGame::CGame(void):m_hge(NULL), m_fsm(NULL)
 {
-	m_fsm = new CStateMachine<CGame>(this);
-
-	m_fsm->SetCurrentState(CDefaultGameState::GetInstance());
+	m_fsm = new CGameFSM(this);
 }
 
 CGame::~CGame(void)
@@ -32,6 +30,7 @@ CGame* CGame::GetInstance()
 BOOL CGame::Initialize()
 {
 	CfgMgr->Initialize(CONFIG_FILE_NAME);
+	ResMgr->Initialize(".\\default");
 
 	m_hge = hgeCreate(HGE_VERSION);
 
@@ -45,19 +44,21 @@ BOOL CGame::Initialize()
 
 	m_hge->System_SetState(HGE_FRAMEFUNC, &CGame::FrameFunc);
 	m_hge->System_SetState(HGE_RENDERFUNC, &CGame::RenderFunc);
-
+	
 	if (!m_hge->System_Initiate())
 	{
 		return FALSE;
 	}
+
+	m_fsm->SetCurrentState(CDefaultGameState::GetInstance());
 
 	return TRUE;
 }
 
 BOOL CGame::Finalize()
 {
-	CConfigManager::GetInstance()->Finalize();
-
+	CfgMgr->Finalize();
+	ResMgr->Finalize();
 	m_hge->System_Shutdown();
 	m_hge->Release();
 
@@ -108,3 +109,7 @@ BOOL CGame::Update()
 	return m_fsm->Update();
 }
 
+BOOL CGame::Render()
+{
+	return TRUE;
+}

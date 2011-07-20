@@ -1,11 +1,11 @@
 HGE Started..
 
 HGE version: 1.80
-Date: 20.07.2011, 00:40:09
+Date: 20.07.2011, 08:00:23
 
 Application: GalDemo
 OS: Windows 6.1.7601
-Memory: 2095148K total, 679848K free
+Memory: 2095148K total, 897504K free
 
 D3D Driver: nvd3dum.dll
 Description: NVIDIA GeForce 8600M GT 
@@ -17,4 +17,3 @@ Sample rate: 44100
 
 Init done.
 
-Can't load resource: test

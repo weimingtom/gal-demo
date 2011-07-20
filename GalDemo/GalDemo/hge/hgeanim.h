@@ -33,11 +33,11 @@ public:
 	
 	void		Play();
 	void		Stop() { bPlaying=false; }
-	void		Resume() { bPlaying=TRUE; }
+	void		Resume() { bPlaying=true; }
 	void		Update(float fDeltaTime);
-	BOOL		IsPlaying() const { return bPlaying; }
+	bool		IsPlaying() const { return bPlaying; }
 
-	void		SetTexture(HTEXTURE tex) { hgeSprite::SetTexture(tex); orig_width = hge->Texture_GetWidth(tex, TRUE); }
+	void		SetTexture(HTEXTURE tex) { hgeSprite::SetTexture(tex); orig_width = hge->Texture_GetWidth(tex, true); }
 	void		SetTextureRect(float x1, float y1, float x2, float y2) { hgeSprite::SetTextureRect(x1,y1,x2,y2); SetFrame(nCurFrame); }
 	void		SetMode(int mode);
 	void		SetSpeed(float FPS) { fSpeed=1.0f/FPS; }
@@ -54,7 +54,7 @@ private:
 
 	int			orig_width;
 
-	BOOL		bPlaying;
+	bool		bPlaying;
 
 	float		fSpeed;
 	float		fSinceLastFrame;

@@ -53,7 +53,7 @@ public:
 	~hgeResourceManager();
 
 	void				ChangeScript(const char *scriptname=0);
-	BOOL				Precache(int groupid=0);
+	bool				Precache(int groupid=0);
 	void				Purge(int groupid=0);
 
 	void*				GetResource(const char *name, int resgroup=0);

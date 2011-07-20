@@ -31,7 +31,7 @@
 class hgeFont
 {
 public:
-	hgeFont(const char *filename, BOOL bMipmap=false);
+	hgeFont(const char *filename, bool bMipmap=false);
 	~hgeFont();
 
 	void		Render(float x, float y, int align, const char *string);
@@ -60,7 +60,7 @@ public:
 	float		GetPreWidth(char chr) const { return pre[(unsigned char)chr]; }
 	float		GetPostWidth(char chr) const { return post[(unsigned char)chr]; }
 	float		GetHeight() const { return fHeight; }
-	float		GetStringWidth(const char *string, BOOL bMultiline=TRUE) const;
+	float		GetStringWidth(const char *string, bool bMultiline=true) const;
 
 private:
 	hgeFont();

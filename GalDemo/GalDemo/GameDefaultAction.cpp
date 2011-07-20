@@ -6,15 +6,18 @@
 
 CGameDefaultAction::CGameDefaultAction(void)
 {
+	m_hge = hgeCreate(HGE_VERSION);
 }
 
 CGameDefaultAction::~CGameDefaultAction(void)
 {
+	m_hge->Release();
 }
 
-BOOL CGameDefaultAction::execute(CGame *game)
+BOOL CGameDefaultAction::execute(CGameState *state)
 {
-	BOOL esc = Game->GetCurrentKeyState(HGEK_ESCAPE);
+	
+	BOOL esc = m_hge->Input_GetKeyState(HGEK_ESCAPE);
 	if (esc)
 	{
 		if (MessageBox(NULL, "确定要退出吗?", "退出", MB_YESNO | MB_ICONINFORMATION) == IDYES)
@@ -23,10 +26,4 @@ BOOL CGameDefaultAction::execute(CGame *game)
 		}
 	}
 	return FALSE;
-}
-
-CGameDefaultAction* CGameDefaultAction::GetInstance()
-{
-	static CGameDefaultAction instance;
-	return &instance;
 }

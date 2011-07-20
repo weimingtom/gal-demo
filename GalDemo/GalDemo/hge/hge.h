@@ -170,7 +170,7 @@ enum hgeStringState
 /*
 ** Callback protoype used by HGE
 */
-typedef BOOL (*hgeCallback)();
+typedef bool (*hgeCallback)();
 
 
 /*
@@ -275,33 +275,33 @@ class HGE
 public:
 	virtual	void		CALL	Release() = 0;
 
-	virtual BOOL		CALL	System_Initiate() = 0;
+	virtual bool		CALL	System_Initiate() = 0;
 	virtual void		CALL	System_Shutdown() = 0;
-	virtual BOOL		CALL	System_Start() = 0;
+	virtual bool		CALL	System_Start() = 0;
 	virtual char*		CALL	System_GetErrorMessage() = 0;
 	virtual	void		CALL	System_Log(const char *format, ...) = 0;
-	virtual BOOL		CALL	System_Launch(const char *url) = 0;
+	virtual bool		CALL	System_Launch(const char *url) = 0;
 	virtual void		CALL	System_Snapshot(const char *filename=0) = 0;
 
 private:
-	virtual void		CALL	System_SetStateBool  (hgeBoolState   state, BOOL        value) = 0;
+	virtual void		CALL	System_SetStateBool  (hgeBoolState   state, bool        value) = 0;
 	virtual void		CALL	System_SetStateFunc  (hgeFuncState   state, hgeCallback value) = 0;
 	virtual void		CALL	System_SetStateHwnd  (hgeHwndState   state, HWND        value) = 0;
 	virtual void		CALL	System_SetStateInt   (hgeIntState    state, int         value) = 0;
 	virtual void		CALL	System_SetStateString(hgeStringState state, const char *value) = 0;
-	virtual BOOL		CALL	System_GetStateBool  (hgeBoolState   state) = 0;
+	virtual bool		CALL	System_GetStateBool  (hgeBoolState   state) = 0;
 	virtual hgeCallback	CALL	System_GetStateFunc  (hgeFuncState   state) = 0;
 	virtual HWND		CALL	System_GetStateHwnd  (hgeHwndState   state) = 0;
 	virtual int			CALL	System_GetStateInt   (hgeIntState    state) = 0;
 	virtual const char*	CALL	System_GetStateString(hgeStringState state) = 0;
 
 public:
-	inline void					System_SetState(hgeBoolState   state, BOOL        value) { System_SetStateBool  (state, value); }
+	inline void					System_SetState(hgeBoolState   state, bool        value) { System_SetStateBool  (state, value); }
 	inline void					System_SetState(hgeFuncState   state, hgeCallback value) { System_SetStateFunc  (state, value); }
 	inline void					System_SetState(hgeHwndState   state, HWND        value) { System_SetStateHwnd  (state, value); }
 	inline void					System_SetState(hgeIntState    state, int         value) { System_SetStateInt   (state, value); }
 	inline void					System_SetState(hgeStringState state, const char *value) { System_SetStateString(state, value); }
-	inline BOOL					System_GetState(hgeBoolState   state) { return System_GetStateBool  (state); }
+	inline bool					System_GetState(hgeBoolState   state) { return System_GetStateBool  (state); }
 	inline hgeCallback			System_GetState(hgeFuncState   state) { return System_GetStateFunc  (state); }
 	inline HWND					System_GetState(hgeHwndState   state) { return System_GetStateHwnd  (state); }
 	inline int					System_GetState(hgeIntState    state) { return System_GetStateInt   (state); }
@@ -309,7 +309,7 @@ public:
 	
 	virtual void*		CALL	Resource_Load(const char *filename, DWORD *size=0) = 0;
 	virtual void		CALL	Resource_Free(void *res) = 0;
-	virtual BOOL		CALL	Resource_AttachPack(const char *filename, const char *password=0) = 0;
+	virtual bool		CALL	Resource_AttachPack(const char *filename, const char *password=0) = 0;
 	virtual void		CALL	Resource_RemovePack(const char *filename) = 0;
 	virtual void		CALL	Resource_RemoveAllPacks() = 0;
 	virtual char*		CALL	Resource_MakePath(const char *filename=0) = 0;
@@ -334,16 +334,16 @@ public:
 	virtual HEFFECT		CALL	Effect_Load(const char *filename, DWORD size=0) = 0;
 	virtual void		CALL	Effect_Free(HEFFECT eff) = 0;
 	virtual HCHANNEL	CALL 	Effect_Play(HEFFECT eff) = 0;
-	virtual HCHANNEL	CALL	Effect_PlayEx(HEFFECT eff, int volume=100, int pan=0, float pitch=1.0f, BOOL loop=false) = 0;
+	virtual HCHANNEL	CALL	Effect_PlayEx(HEFFECT eff, int volume=100, int pan=0, float pitch=1.0f, bool loop=false) = 0;
 
 	virtual HMUSIC		CALL	Music_Load(const char *filename, DWORD size=0) = 0;
 	virtual void		CALL	Music_Free(HMUSIC mus) = 0;
-	virtual HCHANNEL	CALL	Music_Play(HMUSIC mus, BOOL loop, int volume = 100, int order = -1, int row = -1) = 0;
+	virtual HCHANNEL	CALL	Music_Play(HMUSIC mus, bool loop, int volume = 100, int order = -1, int row = -1) = 0;
 	virtual void		CALL	Music_SetAmplification(HMUSIC music, int ampl) = 0;
 	virtual int			CALL	Music_GetAmplification(HMUSIC music) = 0;
 	virtual int			CALL	Music_GetLength(HMUSIC music) = 0;
 	virtual void		CALL	Music_SetPos(HMUSIC music, int order, int row) = 0;
-	virtual BOOL		CALL	Music_GetPos(HMUSIC music, int *order, int *row) = 0;
+	virtual bool		CALL	Music_GetPos(HMUSIC music, int *order, int *row) = 0;
 	virtual void		CALL	Music_SetInstrVolume(HMUSIC music, int instr, int volume) = 0;
 	virtual int			CALL	Music_GetInstrVolume(HMUSIC music, int instr) = 0;
 	virtual void		CALL	Music_SetChannelVolume(HMUSIC music, int channel, int volume) = 0;
@@ -351,7 +351,7 @@ public:
 
 	virtual HSTREAM		CALL	Stream_Load(const char *filename, DWORD size=0) = 0;
 	virtual void		CALL	Stream_Free(HSTREAM stream) = 0;
-	virtual HCHANNEL	CALL	Stream_Play(HSTREAM stream, BOOL loop, int volume = 100) = 0;
+	virtual HCHANNEL	CALL	Stream_Play(HSTREAM stream, bool loop, int volume = 100) = 0;
 
 	virtual void		CALL	Channel_SetPanning(HCHANNEL chn, int pan) = 0;
 	virtual void		CALL 	Channel_SetVolume(HCHANNEL chn, int volume) = 0;
@@ -362,26 +362,26 @@ public:
 	virtual void		CALL 	Channel_PauseAll() = 0;
 	virtual void		CALL 	Channel_ResumeAll() = 0;
 	virtual void		CALL 	Channel_StopAll() = 0;
-	virtual BOOL		CALL	Channel_IsPlaying(HCHANNEL chn) = 0;
+	virtual bool		CALL	Channel_IsPlaying(HCHANNEL chn) = 0;
 	virtual float		CALL	Channel_GetLength(HCHANNEL chn) = 0;
 	virtual float		CALL	Channel_GetPos(HCHANNEL chn) = 0;
 	virtual void		CALL	Channel_SetPos(HCHANNEL chn, float fSeconds) = 0;
 	virtual void		CALL	Channel_SlideTo(HCHANNEL channel, float time, int volume, int pan = -101, float pitch = -1) = 0;
-	virtual BOOL		CALL	Channel_IsSliding(HCHANNEL channel) = 0;
+	virtual bool		CALL	Channel_IsSliding(HCHANNEL channel) = 0;
 
 	virtual void		CALL	Input_GetMousePos(float *x, float *y) = 0;
 	virtual void		CALL	Input_SetMousePos(float x, float y) = 0;
 	virtual int			CALL	Input_GetMouseWheel() = 0;
-	virtual BOOL		CALL	Input_IsMouseOver() = 0;
-	virtual BOOL		CALL	Input_KeyDown(int key) = 0;
-	virtual BOOL		CALL	Input_KeyUp(int key) = 0;
-	virtual BOOL		CALL	Input_GetKeyState(int key) = 0;
+	virtual bool		CALL	Input_IsMouseOver() = 0;
+	virtual bool		CALL	Input_KeyDown(int key) = 0;
+	virtual bool		CALL	Input_KeyUp(int key) = 0;
+	virtual bool		CALL	Input_GetKeyState(int key) = 0;
 	virtual char*		CALL	Input_GetKeyName(int key) = 0;
 	virtual int			CALL	Input_GetKey() = 0;
 	virtual int			CALL	Input_GetChar() = 0;
-	virtual BOOL		CALL	Input_GetEvent(hgeInputEvent *event) = 0;
+	virtual bool		CALL	Input_GetEvent(hgeInputEvent *event) = 0;
 
-	virtual BOOL		CALL	Gfx_BeginScene(HTARGET target=0) = 0;
+	virtual bool		CALL	Gfx_BeginScene(HTARGET target=0) = 0;
 	virtual void		CALL	Gfx_EndScene() = 0;
 	virtual void		CALL	Gfx_Clear(DWORD color) = 0;
 	virtual void		CALL	Gfx_RenderLine(float x1, float y1, float x2, float y2, DWORD color=0xFFFFFFFF, float z=0.5f) = 0;
@@ -392,16 +392,16 @@ public:
 	virtual void		CALL	Gfx_SetClipping(int x=0, int y=0, int w=0, int h=0) = 0;
 	virtual void		CALL	Gfx_SetTransform(float x=0, float y=0, float dx=0, float dy=0, float rot=0, float hscale=0, float vscale=0) = 0; 
 
-	virtual HTARGET		CALL	Target_Create(int width, int height, BOOL zbuffer) = 0;
+	virtual HTARGET		CALL	Target_Create(int width, int height, bool zbuffer) = 0;
 	virtual void		CALL	Target_Free(HTARGET target) = 0;
 	virtual HTEXTURE	CALL	Target_GetTexture(HTARGET target) = 0;
 
 	virtual HTEXTURE	CALL	Texture_Create(int width, int height) = 0;
-	virtual HTEXTURE	CALL	Texture_Load(const char *filename, DWORD size=0, BOOL bMipmap=false) = 0;
+	virtual HTEXTURE	CALL	Texture_Load(const char *filename, DWORD size=0, bool bMipmap=false) = 0;
 	virtual void		CALL	Texture_Free(HTEXTURE tex) = 0;
-	virtual int			CALL	Texture_GetWidth(HTEXTURE tex, BOOL bOriginal=false) = 0;
-	virtual int			CALL	Texture_GetHeight(HTEXTURE tex, BOOL bOriginal=false) = 0;
-	virtual DWORD*		CALL	Texture_Lock(HTEXTURE tex, BOOL bReadOnly=TRUE, int left=0, int top=0, int width=0, int height=0) = 0;
+	virtual int			CALL	Texture_GetWidth(HTEXTURE tex, bool bOriginal=false) = 0;
+	virtual int			CALL	Texture_GetHeight(HTEXTURE tex, bool bOriginal=false) = 0;
+	virtual DWORD*		CALL	Texture_Lock(HTEXTURE tex, bool bReadOnly=true, int left=0, int top=0, int width=0, int height=0) = 0;
 	virtual void		CALL	Texture_Unlock(HTEXTURE tex) = 0;
 };
 

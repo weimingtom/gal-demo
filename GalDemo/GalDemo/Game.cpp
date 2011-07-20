@@ -7,6 +7,26 @@
 #include "DefaultGameState.h"
 #include "ResourceManager.h"
 
+
+static WNDPROC g_oldWndProc = NULL;
+
+LRESULT CALLBACK MyWindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg) {
+	case WM_CLOSE:
+		{
+			if (MessageBox(NULL, "确定要退出吗?", "退出", MB_YESNO | MB_ICONINFORMATION) == IDNO)
+			{
+				return FALSE;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+	g_oldWndProc(hwnd, uMsg, wParam, lParam);
+}
+
 CGame::CGame(void):m_hge(NULL), m_fsm(NULL)
 {
 	m_fsm = new CGameFSM(this);
@@ -30,7 +50,7 @@ CGame* CGame::GetInstance()
 BOOL CGame::Initialize()
 {
 	CfgMgr->Initialize(CONFIG_FILE_NAME);
-	ResMgr->Initialize(".\\default");
+	ResMgr->Initialize("default");
 
 	m_hge = hgeCreate(HGE_VERSION);
 
@@ -49,14 +69,17 @@ BOOL CGame::Initialize()
 	{
 		return FALSE;
 	}
+	
+	g_oldWndProc = SubclassWindow(m_hge->System_GetState(HGE_HWND), MyWindowProc);
 
-	m_fsm->SetCurrentState(CDefaultGameState::GetInstance());
+	m_fsm->StartUp(CDefaultGameState::GetInstance());
 
 	return TRUE;
 }
 
 BOOL CGame::Finalize()
 {
+	m_fsm->ShutDown();
 	CfgMgr->Finalize();
 	ResMgr->Finalize();
 	m_hge->System_Shutdown();
@@ -71,37 +94,15 @@ BOOL CGame::Start()
 	return TRUE;
 }
 
-BOOL CGame::RenderFunc()
+bool CGame::RenderFunc()
 {
 	Game->Render();
 	return TRUE;
 }
 
-BOOL CGame::FrameFunc()
+bool CGame::FrameFunc()
 {
-	if (Game->Update())
-	{
-		return TRUE;
-	}
-	return FALSE;
-}
-
-void CGame::GetKeyInfo( KEY_INFO * kinfo, int keycode)
-{
-	if (keycode)
-	{
-		kinfo->keycode = keycode;
-		kinfo->down = m_hge->Input_KeyDown(keycode);
-		kinfo->up = m_hge->Input_KeyUp(keycode);
-		kinfo->keyname = m_hge->Input_GetKeyName(keycode);
-	}
-	kinfo->lastkeychar = m_hge->Input_GetChar();
-	kinfo->lastkeycode = m_hge->Input_GetKey();
-}
-
-BOOL CGame::GetCurrentKeyState( int keycode )
-{
-	return m_hge->Input_GetKeyState(keycode);
+	return Game->Update();
 }
 
 BOOL CGame::Update()

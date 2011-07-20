@@ -57,17 +57,17 @@ public:
 	hgeGUIButton(int id, float x, float y, float w, float h, HTEXTURE tex, float tx, float ty);
 	virtual			~hgeGUIButton();
 
-	void			SetMode(BOOL _bTrigger) { bTrigger=_bTrigger; }
-	void			SetState(BOOL _bPressed) { bPressed=_bPressed; }
-	BOOL			GetState() const { return bPressed; }
+	void			SetMode(bool _bTrigger) { bTrigger=_bTrigger; }
+	void			SetState(bool _bPressed) { bPressed=_bPressed; }
+	bool			GetState() const { return bPressed; }
 
 	virtual void	Render();
-	virtual BOOL	MouseLButton(BOOL bDown);
+	virtual bool	MouseLButton(bool bDown);
 
 private:
-	BOOL			bTrigger;
-	BOOL			bPressed;
-	BOOL			bOldState;
+	bool			bTrigger;
+	bool			bPressed;
+	bool			bOldState;
 	hgeSprite		*sprUp, *sprDown;
 };
 
@@ -82,7 +82,7 @@ private:
 class hgeGUISlider : public hgeGUIObject
 {
 public:
-	hgeGUISlider(int id, float x, float y, float w, float h, HTEXTURE tex, float tx, float ty, float sw, float sh, BOOL vertical=false);
+	hgeGUISlider(int id, float x, float y, float w, float h, HTEXTURE tex, float tx, float ty, float sw, float sh, bool vertical=false);
 	virtual			~hgeGUISlider();
 
 	void			SetMode(float _fMin, float _fMax, int _mode) { fMin=_fMin; fMax=_fMax; mode=_mode; }
@@ -90,12 +90,12 @@ public:
 	float			GetValue() const { return fVal; }
 
 	virtual void	Render();
-	virtual BOOL	MouseMove(float x, float y);
-	virtual BOOL	MouseLButton(BOOL bDown);
+	virtual bool	MouseMove(float x, float y);
+	virtual bool	MouseLButton(bool bDown);
 
 private:
-	BOOL			bPressed;
-	BOOL			bVertical;
+	bool			bPressed;
+	bool			bVertical;
 	int				mode;
 	float			fMin, fMax, fVal;
 	float			sl_w, sl_h;
@@ -131,10 +131,10 @@ public:
 	void			Clear();
 
 	virtual void	Render();
-	virtual BOOL	MouseMove(float x, float y) { mx=x; my=y; return false; }
-	virtual BOOL	MouseLButton(BOOL bDown);
-	virtual BOOL	MouseWheel(int nNotches);
-	virtual BOOL	KeyClick(int key, int chr);
+	virtual bool	MouseMove(float x, float y) { mx=x; my=y; return false; }
+	virtual bool	MouseLButton(bool bDown);
+	virtual bool	MouseWheel(int nNotches);
+	virtual bool	KeyClick(int key, int chr);
 
 private:
 	hgeSprite		*sprHighlight;

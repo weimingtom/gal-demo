@@ -33,8 +33,8 @@ public:
 	hgeVector	operator+  (const hgeVector &v) const { return hgeVector(x+v.x, y+v.y); }
 	hgeVector&	operator-= (const hgeVector &v)		  { x-=v.x; y-=v.y; return *this;	}
 	hgeVector&	operator+= (const hgeVector &v)		  { x+=v.x; y+=v.y; return *this;	}
-	BOOL		operator== (const hgeVector &v)	const { return (x==v.x && y==v.y);		}
-	BOOL		operator!= (const hgeVector &v)	const { return (x!=v.x || y!=v.y);		}
+	bool		operator== (const hgeVector &v)	const { return (x==v.x && y==v.y);		}
+	bool		operator!= (const hgeVector &v)	const { return (x!=v.x || y!=v.y);		}
 
 	hgeVector	operator/  (const float scalar)	const { return hgeVector(x/scalar, y/scalar); }
 	hgeVector	operator*  (const float scalar) const { return hgeVector(x*scalar, y*scalar); }

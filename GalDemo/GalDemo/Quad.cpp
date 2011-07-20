@@ -11,15 +11,23 @@ CQuad::CQuad( hgeQuad quad )
 CQuad::CQuad()
 {
 	memset(&m_quad, 0x0, sizeof(hgeQuad));
+	for (int i = 0; i < 4; i++)
+	{
+		m_quad.v[i].col = 0xffffffff;
+		m_quad.v[i].z = 0.5;
+	}
 }
 
 CQuad::~CQuad(void)
 {
 }
 
-void CQuad::Render( CGame * owner )
+void CQuad::Render()
 {
-	owner->GetHgeHandle()->Gfx_RenderQuad(&m_quad);	
+	HGE *hge = hgeCreate(HGE_VERSION);
+	hge->Gfx_RenderQuad(&m_quad);	
+	
+	hge->Release();
 }
 
 void CQuad::SetVertex( FPOINT pos[4] )

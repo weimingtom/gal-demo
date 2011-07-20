@@ -12,9 +12,6 @@ public:
 
 	BOOL Render() const
 	{
-		return m_currentState->Render(m_owner);
+		return reinterpret_cast<CGameState *>(m_currentState)->Render();
 	}
-
-protected:
-	CGameState*			m_currentState;
 };

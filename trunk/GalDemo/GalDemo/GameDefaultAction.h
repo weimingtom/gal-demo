@@ -2,6 +2,7 @@
 #include "action.h"
 
 class CGame;
+class HGE;
 
 class CGameDefaultAction :
 	public CAction
@@ -9,7 +10,9 @@ class CGameDefaultAction :
 public:
 	CGameDefaultAction(void);
 	virtual ~CGameDefaultAction(void);
-	static CGameDefaultAction* GetInstance();
 
-	virtual BOOL execute(CGame *);
+	virtual BOOL execute(CGameState *state);
+
+protected:
+	HGE*		m_hge;
 };

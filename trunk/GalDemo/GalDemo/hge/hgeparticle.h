@@ -54,7 +54,7 @@ struct hgeParticleSystemInfo
 
 	float		fDirection;
 	float		fSpread;
-	BOOL		bRelative;
+	bool		bRelative;
 
 	float		fSpeedMin;
 	float		fSpeedMax;
@@ -98,12 +98,12 @@ public:
 	void				Render();
 	void				FireAt(float x, float y);
 	void				Fire();
-	void				Stop(BOOL bKillParticles=false);
+	void				Stop(bool bKillParticles=false);
 	void				Update(float fDeltaTime);
-	void				MoveTo(float x, float y, BOOL bMoveParticles=false);
+	void				MoveTo(float x, float y, bool bMoveParticles=false);
 	void				Transpose(float x, float y) { fTx=x; fTy=y; }
 	void				SetScale(float scale) { fScale = scale; }
-	void				TrackBoundingBox(BOOL bTrack) { bUpdateBoundingBox=bTrack; }
+	void				TrackBoundingBox(bool bTrack) { bUpdateBoundingBox=bTrack; }
 
 	int					GetParticlesAlive() const { return nParticlesAlive; }
 	float				GetAge() const { return fAge; }
@@ -127,7 +127,7 @@ private:
 
 	int					nParticlesAlive;
 	hgeRect				rectBoundingBox;
-	BOOL				bUpdateBoundingBox;
+	bool				bUpdateBoundingBox;
 
 	hgeParticle			particles[MAX_PARTICLES];
 };
@@ -142,7 +142,7 @@ public:
 	void				Render();
 
 	hgeParticleSystem*	SpawnPS(hgeParticleSystemInfo *psi, float x, float y);
-	BOOL				IsPSAlive(hgeParticleSystem *ps) const;
+	bool				IsPSAlive(hgeParticleSystem *ps) const;
 	void				Transpose(float x, float y);
 	void				GetTransposition(float *dx, float *dy) const {*dx=tX; *dy=tY;}
 	void				KillPS(hgeParticleSystem *ps);

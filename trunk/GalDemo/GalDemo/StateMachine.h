@@ -6,6 +6,12 @@ template<class OwnerType> class CStateMachine
 public:
 	CStateMachine(OwnerType *owner):m_owner(owner), m_currentState(NULL){}
 	virtual ~CStateMachine(void){};
+	
+	void StartUp(CState<OwnerType> * state)
+	{
+		m_currentState = state;
+		state->Enter(m_owner);
+	}
 
 	void SetCurrentState(CState<OwnerType> * state)
 	{
@@ -18,6 +24,11 @@ public:
 		m_currentState->Exit(m_owner);
 		m_currentState = state;
 		m_currentState->Enter(m_owner);
+	}
+
+	void ShutDown()
+	{
+		m_currentState->Exit(m_owner);
 	}
 
 	BOOL Update() const

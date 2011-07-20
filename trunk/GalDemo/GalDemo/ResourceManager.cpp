@@ -42,16 +42,14 @@ BOOL CResourceManager::SetScript( LPCSTR name)
 
 BOOL CResourceManager::Finalize()
 {
-	
 	m_resMgr.Purge(0);
-	
 	m_resIds.Destory();
 	return TRUE;
 }
 
 BOOL CResourceManager::LoadResGroup(int group)
 {
-	//m_resMgr.Precache(group);
+	m_resMgr.Precache(group);
 	return FALSE;
 }
 

@@ -1,3 +1,6 @@
 #pragma once
-
-const int ID_TEXTURE_TEST = 0;
+typedef enum _res_id_
+{
+	ID_TEXTURE_TEST = 0,
+	RES_ID_END
+}RES_ID;

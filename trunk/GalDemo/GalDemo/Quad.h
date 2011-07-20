@@ -6,7 +6,7 @@
 class CGame;
 
 class CQuad :
-	public CRenderableObject<CGame>
+	public CRenderableObject
 {
 public:
 	CQuad(hgeQuad quad);
@@ -31,7 +31,7 @@ public:
 	void SetTexture(HTEXTURE tex){m_quad.tex = tex;}
 	HTEXTURE GetTexture(){return m_quad.tex;}
 
-	virtual void Render(CGame *);
+	virtual void Render();
 protected:
 	hgeQuad		m_quad;
 };

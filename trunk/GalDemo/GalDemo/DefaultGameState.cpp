@@ -11,43 +11,51 @@
 
 CDefaultGameState::CDefaultGameState(void)
 {
-	m_actionStack.push(CGameDefaultAction::GetInstance());
-
-	m_quad = new CQuad;
-	HTEXTURE tex = Game->GetHgeHandle()->Texture_Load("test.png");
-	//HTEXTURE tex = ResMgr->GetTexture(ID_TEXTURE_TEST);
-	m_quad->SetTexture(tex);
-	FPOINT vs[4] = {{96.0/128.0, 64.0/128.0}, {128.0/128.0, 64.0/128.0},
-	{128.0/128.0, 96.0/128.0}, {96.0/128.0, 96.0/128.0}};
-	m_quad->SetVertex(vs);
-	FPOINT pos[4] = {{0, 0}, {16, 0}, {16, 16}, {0, 16}};
-	m_quad->SetPosition(pos);
-	int col[4] = {0xFFFFA000, 0xFFFFA000, 0xFFFFA000, 0xFFFFA000};
-	float z[4] = {0.5, 0.5, 0.5, 0.5};
-
-	m_quad->SetZ(z);
-	m_quad->SetColor(col);
-
+	
 }
 
 CDefaultGameState::~CDefaultGameState(void)
 {
-	delete m_quad;
+	
 }
 
 void CDefaultGameState::Enter( CGame * game )
 {
-	
+	CGameDefaultAction *action = new CGameDefaultAction;
+	m_actionStack.push(action);
+
+	CQuad *quad = new CQuad;
+	m_renderGroup[0].insert(quad);
+	HTEXTURE tex = ResMgr->GetTexture(ID_TEXTURE_TEST);
+	quad->SetTexture(tex);
+	FPOINT vs[4] = {{0.0, 0.0}, {1.0, 0.0},
+	{1.0, 1.0}, {0.0, 1.0}};
+	quad->SetVertex(vs);
+	FPOINT pos[4] = {{0, 0}, {488, 0}, {488, 512}, {0, 512}};
+	quad->SetPosition(pos);
 }
 
 BOOL CDefaultGameState::Execute( CGame * game )
 {
-	return m_actionStack.top()->execute(game);
+	return m_actionStack.top()->execute(this);
 }
 
 void CDefaultGameState::Exit( CGame * game )
 {
-	
+	while(m_actionStack.size())
+	{
+		delete m_actionStack.top();
+		m_actionStack.pop();
+	}
+	for(int i = 0; i < 3; i++)
+	{
+		std::set<CRenderableObject *>::iterator iter = m_renderGroup[i].begin();
+		while(iter != m_renderGroup[i].end())
+		{
+			delete (*iter);
+			iter++;
+		}
+	}
 }
 
 CDefaultGameState* CDefaultGameState::GetInstance()
@@ -56,8 +64,23 @@ CDefaultGameState* CDefaultGameState::GetInstance()
 	return &instance;
 }
 
-BOOL CDefaultGameState::Render( CGame * game )
+BOOL CDefaultGameState::Render( )
 {
-	m_quad->Render(game);
+	HGE *hge = hgeCreate(HGE_VERSION);
+	hge->Gfx_BeginScene();
+	hge->Gfx_Clear(0);
+	
+	for(int i = 0; i < 3; i++)
+	{
+		std::set<CRenderableObject *>::iterator iter = m_renderGroup[i].begin();
+		while(iter != m_renderGroup[i].end())
+		{
+			(*iter)->Render();
+			iter++;
+		}
+	}
+
+	hge->Gfx_EndScene();
+	hge->Release();
 	return TRUE;
 }

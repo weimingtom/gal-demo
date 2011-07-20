@@ -38,22 +38,22 @@ public:
 	virtual void	Enter() {}
 	virtual void	Leave() {}
 	virtual void	Reset() {}
-	virtual BOOL	IsDone() { return TRUE; }
-	virtual void	Focus(BOOL bFocused) {}
-	virtual void	MouseOver(BOOL bOver) {}
+	virtual bool	IsDone() { return true; }
+	virtual void	Focus(bool bFocused) {}
+	virtual void	MouseOver(bool bOver) {}
 
-	virtual BOOL	MouseMove(float x, float y) { return false; }
-	virtual BOOL	MouseLButton(BOOL bDown) { return false; }
-	virtual BOOL	MouseRButton(BOOL bDown) { return false; }
-	virtual BOOL	MouseWheel(int nNotches) { return false; }
-	virtual BOOL	KeyClick(int key, int chr) { return false; }
+	virtual bool	MouseMove(float x, float y) { return false; }
+	virtual bool	MouseLButton(bool bDown) { return false; }
+	virtual bool	MouseRButton(bool bDown) { return false; }
+	virtual bool	MouseWheel(int nNotches) { return false; }
+	virtual bool	KeyClick(int key, int chr) { return false; }
 
 	virtual void	SetColor(DWORD _color) { color=_color; }
 	
 	int				id;
-	BOOL			bStatic;
-	BOOL			bVisible;
-	BOOL			bEnabled;
+	bool			bStatic;
+	bool			bVisible;
+	bool			bEnabled;
 	hgeRect			rect;
 	DWORD			color;
 
@@ -83,8 +83,8 @@ public:
 	hgeGUIObject*	GetCtrl(int id) const;
 
 	void			MoveCtrl(int id, float x, float y);
-	void			ShowCtrl(int id, BOOL bVisible);
-	void			EnableCtrl(int id, BOOL bEnabled);
+	void			ShowCtrl(int id, bool bVisible);
+	void			EnableCtrl(int id, bool bEnabled);
 
 	void			SetNavMode(int mode);
 	void			SetCursor(hgeSprite *spr);
@@ -103,7 +103,7 @@ public:
 private:
 	hgeGUI(const hgeGUI &);
 	hgeGUI&			operator= (const hgeGUI&);
-	BOOL			ProcessCtrl(hgeGUIObject *ctrl);
+	bool			ProcessCtrl(hgeGUIObject *ctrl);
 
 	static HGE		*hge;
 
@@ -118,8 +118,8 @@ private:
 
 	float			mx,my;
 	int				nWheel;
-	BOOL			bLPressed, bLReleased;
-	BOOL			bRPressed, bRReleased;
+	bool			bLPressed, bLReleased;
+	bool			bRPressed, bRReleased;
 };
 
 

@@ -64,7 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="hge.lib hgehelp.lib"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="LIBC.lib"
+				IgnoreDefaultLibraryNames="libcmt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -396,11 +396,11 @@
 			>
 		</File>
 		<File
-			RelativePath=".\default.gids"
+			RelativePath="..\debug\default.gids"
 			>
 		</File>
 		<File
-			RelativePath=".\default.gres"
+			RelativePath="..\debug\default.gres"
 			>
 		</File>
 	</Files>

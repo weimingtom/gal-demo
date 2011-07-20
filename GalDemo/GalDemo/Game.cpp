@@ -73,7 +73,7 @@ BOOL CGame::Start()
 
 BOOL CGame::RenderFunc()
 {
-	
+	Game->Render();
 	return TRUE;
 }
 
@@ -111,5 +111,5 @@ BOOL CGame::Update()
 
 BOOL CGame::Render()
 {
-	return TRUE;
+	return m_fsm->Render();
 }

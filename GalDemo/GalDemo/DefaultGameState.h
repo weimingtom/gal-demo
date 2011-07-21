@@ -15,9 +15,9 @@ public:
 	
 	static CDefaultGameState* GetInstance();
 	virtual void Enter(CGame *);
-	virtual BOOL Execute(CGame *);
+	virtual bool Execute(CGame *);
 	virtual void Exit(CGame *);
-	virtual BOOL Render();
+	virtual bool Render();
 
 protected:
 	std::stack<CAction *>	m_actionStack;

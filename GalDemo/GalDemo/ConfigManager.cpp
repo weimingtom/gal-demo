@@ -16,16 +16,16 @@ CConfigManager* CConfigManager::GetInstance()
 	return &instance;
 }
 
-BOOL CConfigManager::Initialize(char * fname)
+bool CConfigManager::Initialize(char * fname)
 {
 	m_configFileName = fname;
 	m_section = CONFIG_BASIC_SECTION;
-	return TRUE;
+	return true;
 }
 
-BOOL CConfigManager::Finalize()
+bool CConfigManager::Finalize()
 {
-	return TRUE;
+	return true;
 }
 
 int CConfigManager::GetWindowWidth()
@@ -38,9 +38,13 @@ int CConfigManager::GetWindowHeight()
 	return GetPrivateProfileInt(m_section.c_str(), SCREEN_HEIGHT, 480, m_configFileName.c_str());
 }
 
-BOOL CConfigManager::IsWindowed()
+bool CConfigManager::IsWindowed()
 {
-	return GetPrivateProfileInt(m_section.c_str(), SCREEN_WINDOWED, 1, m_configFileName.c_str());
+	if (1 == GetPrivateProfileInt(m_section.c_str(), SCREEN_WINDOWED, 1, m_configFileName.c_str()))
+	{
+		return true;
+	}
+	return false;
 }
 
 int CConfigManager::GetScreenDepth()
@@ -62,4 +66,12 @@ std::string CConfigManager::GetLogFileName()
 	ZeroMemory(name, 256 * sizeof(char));
 	GetPrivateProfileString(m_section.c_str(), LOG_FILE, "GalDefault", name, 256 * sizeof(char), m_configFileName.c_str());
 	return name;
+}
+
+std::string CConfigManager::GetSystenFont()
+{
+	char font[256];
+	ZeroMemory(font, 256 * sizeof(char));
+	GetPrivateProfileString(m_section.c_str(), FONT_PATH, "font", font, 256 * sizeof(char), m_configFileName.c_str());
+	return font;
 }

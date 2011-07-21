@@ -19,7 +19,7 @@ CResourceManager* CResourceManager::GetInstance()
 	return &instance;
 }
 
-BOOL CResourceManager::Initialize(LPCTSTR name)
+bool CResourceManager::Initialize(LPCTSTR name)
 {
 	string sname = name;
 	sname.append(".gres");
@@ -29,7 +29,7 @@ BOOL CResourceManager::Initialize(LPCTSTR name)
 	return m_resIds.LoadIdentities(iname.c_str());
 }
 
-BOOL CResourceManager::SetScript( LPCSTR name)
+bool CResourceManager::SetScript( LPCSTR name)
 {
 	string sname = name;
 	sname.append(".gres");
@@ -40,17 +40,17 @@ BOOL CResourceManager::SetScript( LPCSTR name)
 	return m_resIds.LoadIdentities(iname.c_str());
 }
 
-BOOL CResourceManager::Finalize()
+bool CResourceManager::Finalize()
 {
 	m_resMgr.Purge(0);
 	m_resIds.Destory();
-	return TRUE;
+	return true;
 }
 
-BOOL CResourceManager::LoadResGroup(int group)
+bool CResourceManager::LoadResGroup(int group)
 {
 	m_resMgr.Precache(group);
-	return FALSE;
+	return false;
 }
 
 HTEXTURE CResourceManager::GetTexture( LONG ID, int group /*= 0*/ )
@@ -58,14 +58,14 @@ HTEXTURE CResourceManager::GetTexture( LONG ID, int group /*= 0*/ )
 	return m_resMgr.GetTexture(m_resIds.LookUp(ID), group);
 }
 
-BOOL CResourceIdentity::LoadIdentities( LPCSTR fname)
+bool CResourceIdentity::LoadIdentities( LPCSTR fname)
 {
 	Destory();
 	ifstream infile;
 	infile.open(fname);
 	if (!infile.is_open())
 	{
-		return FALSE;
+		return false;
 	}
 	char buff[MAX_RESNAME_LEN];
 	int id = 0;
@@ -75,7 +75,7 @@ BOOL CResourceIdentity::LoadIdentities( LPCSTR fname)
 		memcpy(resName, buff, MAX_RESNAME_LEN);
 		m_resIdMap[id++] = resName;
 	}
-	return TRUE;
+	return true;
 }
 
 LPCTSTR CResourceIdentity::LookUp( int id )

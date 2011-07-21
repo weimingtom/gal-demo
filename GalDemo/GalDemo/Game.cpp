@@ -7,27 +7,7 @@
 #include "DefaultGameState.h"
 #include "ResourceManager.h"
 
-
-static WNDPROC g_oldWndProc = NULL;
-
-LRESULT CALLBACK MyWindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg) {
-	case WM_CLOSE:
-		{
-			if (MessageBox(NULL, "确定要退出吗?", "退出", MB_YESNO | MB_ICONINFORMATION) == IDNO)
-			{
-				return FALSE;
-			}
-		}
-		break;
-	default:
-		break;
-	}
-	g_oldWndProc(hwnd, uMsg, wParam, lParam);
-}
-
-CGame::CGame(void):m_hge(NULL), m_fsm(NULL)
+CGame::CGame(void):m_hge(NULL), m_fsm(NULL), m_over(true)
 {
 	m_fsm = new CGameFSM(this);
 }
@@ -47,7 +27,7 @@ CGame* CGame::GetInstance()
 	return &instance;
 }
 
-BOOL CGame::Initialize()
+bool CGame::Initialize()
 {
 	CfgMgr->Initialize(CONFIG_FILE_NAME);
 	ResMgr->Initialize("default");
@@ -64,20 +44,20 @@ BOOL CGame::Initialize()
 
 	m_hge->System_SetState(HGE_FRAMEFUNC, &CGame::FrameFunc);
 	m_hge->System_SetState(HGE_RENDERFUNC, &CGame::RenderFunc);
-	
+	m_hge->System_SetState(HGE_EXITFUNC, &CGame::ExitFunc);
+
 	if (!m_hge->System_Initiate())
 	{
-		return FALSE;
+		return false;
 	}
-	
-	g_oldWndProc = SubclassWindow(m_hge->System_GetState(HGE_HWND), MyWindowProc);
-
+	m_over = false;
 	m_fsm->StartUp(CDefaultGameState::GetInstance());
+	
 
-	return TRUE;
+	return true;
 }
 
-BOOL CGame::Finalize()
+bool CGame::Finalize()
 {
 	m_fsm->ShutDown();
 	CfgMgr->Finalize();
@@ -85,19 +65,19 @@ BOOL CGame::Finalize()
 	m_hge->System_Shutdown();
 	m_hge->Release();
 
-	return TRUE;
+	return true;
 }
 
-BOOL CGame::Start()
+bool CGame::Start()
 {
 	m_hge->System_Start();
-	return TRUE;
+	return true;
 }
 
 bool CGame::RenderFunc()
 {
 	Game->Render();
-	return TRUE;
+	return true;
 }
 
 bool CGame::FrameFunc()
@@ -105,12 +85,27 @@ bool CGame::FrameFunc()
 	return Game->Update();
 }
 
-BOOL CGame::Update()
+bool CGame::ExitFunc()
 {
+	if (MessageBox(NULL, "确定要退出吗?", "退出", MB_YESNO | MB_ICONINFORMATION) == IDYES)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CGame::Update()
+{
+	if (m_over)
+	{
+		return true;
+	}
+
 	return m_fsm->Update();
 }
 
-BOOL CGame::Render()
+bool CGame::Render()
 {
 	return m_fsm->Render();
 }
+

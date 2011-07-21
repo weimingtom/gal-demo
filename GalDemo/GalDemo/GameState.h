@@ -9,7 +9,7 @@ class CGameState :
 {
 public:
 
-	virtual BOOL Render() = 0;
+	virtual bool Render() = 0;
 
 protected:
 	std::set<CRenderableObject *>	m_renderGroup[3];//0 BG 1 character 2 gui

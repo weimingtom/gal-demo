@@ -31,7 +31,7 @@ public:
 		m_currentState->Exit(m_owner);
 	}
 
-	BOOL Update() const
+	bool Update() const
 	{
 		return m_currentState->Execute(m_owner);
 	}

@@ -8,5 +8,5 @@ class CAction
 public:
 	virtual ~CAction(void){};
 
-	virtual BOOL execute(CGameState *) = 0;
+	virtual bool execute(CGameState *) = 0;
 };

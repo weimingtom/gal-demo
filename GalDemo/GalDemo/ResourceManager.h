@@ -7,7 +7,7 @@ class CResourceIdentity
 {
 public:
 	const static int MAX_RESNAME_LEN = 64;
-	BOOL LoadIdentities(LPCSTR);
+	bool LoadIdentities(LPCSTR);
 	LPCTSTR LookUp(int id);
 	void Destory();
 private:
@@ -24,11 +24,11 @@ public:
 
 	static CResourceManager* GetInstance();
 	
-	BOOL Initialize(LPCTSTR);
-	BOOL Finalize();
+	bool Initialize(LPCTSTR);
+	bool Finalize();
 
-	BOOL SetScript(LPCSTR);
-	BOOL LoadResGroup(int);
+	bool SetScript(LPCSTR);
+	bool LoadResGroup(int);
 
 	HTEXTURE GetTexture(LONG ID, int group = 0);
 

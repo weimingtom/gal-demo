@@ -10,7 +10,7 @@ class CGameFSM :
 public:
 	CGameFSM(CGame *owner):CStateMachine<CGame>(owner){}
 
-	BOOL Render() const
+	bool Render() const
 	{
 		return reinterpret_cast<CGameState *>(m_currentState)->Render();
 	}

@@ -8,17 +8,18 @@ public:
 	~CConfigManager(void);
 
 	static CConfigManager* GetInstance();
-	BOOL Initialize(char * fname);
-	BOOL Finalize();
+	bool Initialize(char * fname);
+	bool Finalize();
 
 	void SetConfigSection(std::string section){m_section = section;}
 	int	 GetWindowWidth();
 	int	 GetWindowHeight();
 	int  GetScreenDepth();
-	BOOL IsWindowed();
+	bool IsWindowed();
 
 	std::string GetWindowTitle();
 	std::string	GetLogFileName();
+	std::string	GetSystenFont();
 
 private:
 	std::string					m_configFileName;

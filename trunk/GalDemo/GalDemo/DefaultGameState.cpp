@@ -8,6 +8,8 @@
 #include "utils.h"
 #include "Quad.h"
 #include "constdefines.h"
+#include "Text.h"
+#include "ConfigManager.h"
 
 CDefaultGameState::CDefaultGameState(void)
 {
@@ -26,6 +28,8 @@ void CDefaultGameState::Enter( CGame * game )
 
 	CQuad *quad = new CQuad;
 	m_renderGroup[0].insert(quad);
+	CText *text = new CText;
+	
 	HTEXTURE tex = ResMgr->GetTexture(ID_TEXTURE_TEST);
 	quad->SetTexture(tex);
 	FPOINT vs[4] = {{0.0, 0.0}, {1.0, 0.0},
@@ -33,9 +37,23 @@ void CDefaultGameState::Enter( CGame * game )
 	quad->SetVertex(vs);
 	FPOINT pos[4] = {{0, 0}, {488, 0}, {488, 512}, {0, 512}};
 	quad->SetPosition(pos);
+
+	if (!text->LoadFont(CfgMgr->GetSystenFont().c_str(), 30))
+	{
+		MessageBox(NULL, "无法加载字体!", "错误", MB_OK | MB_ICONWARNING);
+		game->EndGame();
+	}
+	else
+	{
+		text->SetText(L"真他妈爽！");
+		text->SetColor(ARGB(255, 0, 0, 0));
+		FPOINT p = {100, 100};
+		text->SetPos(p);
+		m_renderGroup[2].insert(text);
+	}
 }
 
-BOOL CDefaultGameState::Execute( CGame * game )
+bool CDefaultGameState::Execute( CGame * game )
 {
 	return m_actionStack.top()->execute(this);
 }
@@ -64,7 +82,7 @@ CDefaultGameState* CDefaultGameState::GetInstance()
 	return &instance;
 }
 
-BOOL CDefaultGameState::Render( )
+bool CDefaultGameState::Render()
 {
 	HGE *hge = hgeCreate(HGE_VERSION);
 	hge->Gfx_BeginScene();
@@ -82,5 +100,5 @@ BOOL CDefaultGameState::Render( )
 
 	hge->Gfx_EndScene();
 	hge->Release();
-	return TRUE;
+	return true;
 }

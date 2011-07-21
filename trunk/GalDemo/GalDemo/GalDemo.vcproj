@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./hge"
+				AdditionalIncludeDirectories="./hge;F:\work\GalDemo\GalDemo\freetype"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="hge.lib hgehelp.lib"
+				AdditionalDependencies="hge.lib hgehelp.lib freetype221ST.lib"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="libcmt.lib"
 				GenerateDebugInformation="true"
@@ -215,6 +215,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\hgeTTFont.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\hgeTTFontManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>
@@ -244,6 +252,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Text.cpp"
 				>
 			</File>
 		</Filter>
@@ -293,6 +305,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\hgeTTFont.h"
+				>
+			</File>
+			<File
+				RelativePath=".\hgeTTFontManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\IDdefines.h"
 				>
 			</File>
@@ -322,6 +342,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Text.h"
 				>
 			</File>
 			<File
@@ -388,6 +412,14 @@
 			</File>
 			<File
 				RelativePath=".\hge\hgevector.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="freetype"
+			>
+			<File
+				RelativePath=".\freetype\ft2build.h"
 				>
 			</File>
 		</Filter>

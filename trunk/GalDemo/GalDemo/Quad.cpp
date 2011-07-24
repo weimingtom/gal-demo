@@ -1,21 +1,56 @@
 #include "stdafx.h"
 #include "Quad.h"
 #include "Game.h"
+#include <assert.h>
 
-CQuad::CQuad( hgeQuad quad )
+CQuad::CQuad( hgeQuad quad, int id):CRenderableObject(id)
 {
 	memset(&m_quad, 0x0, sizeof(hgeQuad));
-	m_quad = quad;
+	memcpy(&m_quad, &quad, sizeof(hgeQuad));
 }
 
-CQuad::CQuad()
+CQuad::CQuad(HTEXTURE tex, int id):CRenderableObject(id)
 {
+	assert(tex != 0);
 	memset(&m_quad, 0x0, sizeof(hgeQuad));
 	for (int i = 0; i < 4; i++)
 	{
 		m_quad.v[i].col = 0xffffffff;
 		m_quad.v[i].z = 0.5;
 	}
+
+	m_quad.blend = BLEND_DEFAULT;
+	m_quad.tex = tex;
+	
+	HGE *hge = hgeCreate(HGE_VERSION);
+	
+	float width = hge->Texture_GetWidth(tex);
+	float height = hge->Texture_GetHeight(tex);
+	hge->Release();
+
+	m_quad.v[0].tx = 0;
+	m_quad.v[0].ty = 0;
+	
+	m_quad.v[1].tx = 1;
+	m_quad.v[1].ty = 0;
+
+	m_quad.v[2].tx = 1;
+	m_quad.v[2].ty = 1;
+	
+	m_quad.v[3].tx = 0;
+	m_quad.v[3].ty = 1;
+
+	m_quad.v[0].x = 0;
+	m_quad.v[0].y = 0;
+
+	m_quad.v[1].x = width;
+	m_quad.v[1].y = 0;
+
+	m_quad.v[2].x = width;
+	m_quad.v[2].y = height;
+
+	m_quad.v[3].x = 0;
+	m_quad.v[3].y = height;
 }
 
 CQuad::~CQuad(void)

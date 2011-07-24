@@ -16,6 +16,7 @@ public:
 	static CGame* GetInstance();
 
 	HGE* GetHgeHandle(){return m_hge;}
+	CGameFSM* GetFSM(){return m_fsm;}
 
 	bool Initialize();
 	bool Finalize();

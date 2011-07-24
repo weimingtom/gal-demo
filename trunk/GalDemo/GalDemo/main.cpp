@@ -5,7 +5,12 @@
 int WINAPI WinMain( __in HINSTANCE hInstance, __in_opt HINSTANCE hPrevInstance, __in LPSTR lpCmdLine, __in int nShowCmd )
 {
 	CGame *game = CGame::GetInstance();
-	game->Initialize();
+	
+	if (!game->Initialize())
+	{
+		MessageBox(NULL, "³õÊ¼»¯Ê§°Ü!", "´íÎó", MB_OK | MB_ICONWARNING);
+		return 1;
+	}
 	game->Start();
 	game->Finalize();
 	return 0;

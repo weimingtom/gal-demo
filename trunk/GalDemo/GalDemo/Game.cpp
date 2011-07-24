@@ -6,6 +6,7 @@
 #include "GameFSM.h"
 #include "DefaultGameState.h"
 #include "ResourceManager.h"
+#include "GameTile.h"
 
 CGame::CGame(void):m_hge(NULL), m_fsm(NULL), m_over(true)
 {
@@ -45,14 +46,14 @@ bool CGame::Initialize()
 	m_hge->System_SetState(HGE_FRAMEFUNC, &CGame::FrameFunc);
 	m_hge->System_SetState(HGE_RENDERFUNC, &CGame::RenderFunc);
 	m_hge->System_SetState(HGE_EXITFUNC, &CGame::ExitFunc);
+	
+	//m_hge->System_SetState(HGE_HIDEMOUSE, false);
 
 	if (!m_hge->System_Initiate())
 	{
 		return false;
 	}
 	m_over = false;
-	m_fsm->StartUp(CDefaultGameState::GetInstance());
-	
 
 	return true;
 }
@@ -70,6 +71,7 @@ bool CGame::Finalize()
 
 bool CGame::Start()
 {
+	m_fsm->StartUp(TitleState);
 	m_hge->System_Start();
 	return true;
 }
@@ -77,7 +79,7 @@ bool CGame::Start()
 bool CGame::RenderFunc()
 {
 	Game->Render();
-	return true;
+	return false;
 }
 
 bool CGame::FrameFunc()

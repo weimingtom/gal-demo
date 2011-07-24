@@ -2,3 +2,13 @@ Texture test
 {
 	filename=res\pic\test.png
 }
+
+Texture title
+{
+	filename=res\pic\title.png
+}
+
+Texture cursor
+{
+	filename=res\pic\cursor.png
+}

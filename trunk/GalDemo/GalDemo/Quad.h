@@ -9,8 +9,8 @@ class CQuad :
 	public CRenderableObject
 {
 public:
-	CQuad(hgeQuad quad);
-	CQuad();
+	CQuad(hgeQuad quad, int id = -1);
+	CQuad(HTEXTURE tex, int id = -1);
 	virtual ~CQuad(void);
 	
 	void SetBlendMode(int blend){m_quad.blend = blend;}
@@ -32,6 +32,7 @@ public:
 	HTEXTURE GetTexture(){return m_quad.tex;}
 
 	virtual void Render();
+	virtual int  Update(float dt){return 0;}
 protected:
 	hgeQuad		m_quad;
 };

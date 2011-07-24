@@ -11,7 +11,7 @@ public:
 	CGameDefaultAction(void);
 	virtual ~CGameDefaultAction(void);
 
-	virtual bool execute(CGameState *state);
+	virtual int execute(CGameState *state);
 
 protected:
 	HGE*		m_hge;

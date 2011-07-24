@@ -25,29 +25,20 @@ void CDefaultGameState::Enter( CGame * game )
 {
 	CGameDefaultAction *action = new CGameDefaultAction;
 	m_actionStack.push(action);
-
-	CQuad *quad = new CQuad;
-	m_renderGroup[0].insert(quad);
-	CText *text = new CText;
 	
-	HTEXTURE tex = ResMgr->GetTexture(ID_TEXTURE_TEST);
-	quad->SetTexture(tex);
-	FPOINT vs[4] = {{0.0, 0.0}, {1.0, 0.0},
-	{1.0, 1.0}, {0.0, 1.0}};
-	quad->SetVertex(vs);
-	FPOINT pos[4] = {{0, 0}, {488, 0}, {488, 512}, {0, 512}};
-	quad->SetPosition(pos);
+	m_renderGroup[0].insert(new CQuad(ResMgr->GetTexture(RES_TEXTURE_TEST)));
+	CText *text = new CText;
 
-	if (!text->LoadFont(CfgMgr->GetSystenFont().c_str(), 30))
+	if (!text->LoadFont(CfgMgr->GetSystenFont().c_str(), 60))
 	{
 		MessageBox(NULL, "无法加载字体!", "错误", MB_OK | MB_ICONWARNING);
 		game->EndGame();
 	}
 	else
 	{
-		text->SetText(L"真他妈爽！");
+		text->SetText(L"haha！");
 		text->SetColor(ARGB(255, 0, 0, 0));
-		FPOINT p = {100, 100};
+		FPOINT p(100.0, 100.0);
 		text->SetPos(p);
 		m_renderGroup[2].insert(text);
 	}
@@ -55,7 +46,12 @@ void CDefaultGameState::Enter( CGame * game )
 
 bool CDefaultGameState::Execute( CGame * game )
 {
-	return m_actionStack.top()->execute(this);
+
+	if (m_actionStack.top()->execute(this))
+	{
+		return true;
+	}
+	return false;
 }
 
 void CDefaultGameState::Exit( CGame * game )

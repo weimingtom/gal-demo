@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include <assert.h>
 
 template<class OwnerType> class CStateMachine
 {
@@ -18,10 +19,11 @@ public:
 		m_currentState = state;
 	}
 	
-	void ChangeState(CState<OwnerType> * state)
+	virtual void ChangeState(CState<OwnerType> * state)
 	{
 		assert(m_currentState && state);
 		m_currentState->Exit(m_owner);
+		m_previousState = m_currentState;
 		m_currentState = state;
 		m_currentState->Enter(m_owner);
 	}
@@ -31,12 +33,13 @@ public:
 		m_currentState->Exit(m_owner);
 	}
 
-	bool Update() const
+	virtual bool Update()
 	{
 		return m_currentState->Execute(m_owner);
 	}
 
 protected:
 	CState<OwnerType>*			m_currentState;
+	CState<OwnerType>*			m_previousState;
 	OwnerType*					m_owner;
 };

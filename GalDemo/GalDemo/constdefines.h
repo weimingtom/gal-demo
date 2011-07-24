@@ -12,3 +12,9 @@
 #define CfgMgr					CConfigManager::GetInstance()
 #define ResMgr					CResourceManager::GetInstance()
 #define Game					CGame::GetInstance()
+
+#define	TitleState				CGameTile::GetInstance()
+
+
+#define TITLE_FONT_SIZE			30
+#define ARTICAL_FONT_SIZE		20

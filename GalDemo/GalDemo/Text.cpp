@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Text.h"
-#include "hgeTTFont.h"
 #include "hgeTTFontManager.h"
 #include "hgefont.h"
+#include "hgeTTFont.h"
 
-CText::CText(): m_ttfFont(NULL), m_text(NULL), m_alian(HGETEXT_LEFT)
+CText::CText(int id):CRenderableObject(id), m_ttfFont(NULL), m_text(NULL), m_alian(HGETEXT_LEFT)
 {
 	m_pos.x = 0.0;
 	m_pos.y = 0.0;
@@ -38,12 +38,27 @@ void CText::SetColor( DWORD color)
 	m_ttfFont->SetColor(color);
 }
 
-void CText::SetText( LPWSTR text)
+void CText::SetText( LPCWSTR text)
 {
 	if (text)
 	{
-		int size = wcslen(text) + 1;
+		unsigned int size = wcslen(text) + 1;
 		m_text = new wchar_t[size];
-		wcscpy(m_text, text);
+		wcscpy_s(m_text, size, text);
 	}
+}
+
+float CText::GetHeight()
+{
+	return m_ttfFont->GetHeight();
+}
+
+float CText::GetWidth()
+{
+	return m_ttfFont->GetStringWidth(m_text);
+}
+
+float CText::TestWidth( LPCWSTR str )
+{
+	return m_ttfFont->GetStringWidth(str);
 }

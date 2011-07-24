@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./hge;F:\work\GalDemo\GalDemo\freetype"
+				AdditionalIncludeDirectories=".\hge;.\freetype"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -179,10 +179,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Action.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\BackGroundMusic.cpp"
 				>
 			</File>
@@ -191,27 +187,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DefaultGameState.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Display.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Game.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\GameDefaultAction.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\GameFSM.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GameState.cpp"
 				>
 			</File>
 			<File
@@ -227,23 +207,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Quad.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\RenderableObject.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ResourceManager.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\SoundEffect.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\State.cpp"
 				>
 			</File>
 			<File
@@ -254,20 +222,12 @@
 				RelativePath=".\stdafx.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\Text.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Í·ÎÄ¼þ"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\Action.h"
-				>
-			</File>
 			<File
 				RelativePath=".\BackGroundMusic.h"
 				>
@@ -278,14 +238,6 @@
 			</File>
 			<File
 				RelativePath=".\constdefines.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DefaultGameState.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Display.h"
 				>
 			</File>
 			<File
@@ -301,10 +253,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GameState.h"
-				>
-			</File>
-			<File
 				RelativePath=".\hgeTTFont.h"
 				>
 			</File>
@@ -317,14 +265,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Quad.h"
-				>
-			</File>
-			<File
-				RelativePath=".\RenderableObject.h"
-				>
-			</File>
-			<File
 				RelativePath=".\ResourceManager.h"
 				>
 			</File>
@@ -333,19 +273,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\State.h"
-				>
-			</File>
-			<File
 				RelativePath=".\StateMachine.h"
 				>
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Text.h"
 				>
 			</File>
 			<File
@@ -358,6 +290,18 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\debug\config.ini"
+				>
+			</File>
+			<File
+				RelativePath="..\debug\default.gids"
+				>
+			</File>
+			<File
+				RelativePath="..\debug\default.gres"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="HGE"
@@ -423,18 +367,134 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\config.ini"
+		<Filter
+			Name="Action"
 			>
-		</File>
-		<File
-			RelativePath="..\debug\default.gids"
+			<File
+				RelativePath=".\Action.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Action.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EffectAction.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameDefaultAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MenuAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MenuAction.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="State"
 			>
-		</File>
-		<File
-			RelativePath="..\debug\default.gres"
+			<File
+				RelativePath=".\DefaultGameState.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DefaultGameState.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameState.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GameState.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameTile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GameTile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\State.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\State.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Object"
 			>
-		</File>
+			<File
+				RelativePath=".\FadeOut.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FadeOut.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gui.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\gui.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Quad.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Quad.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderableObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RenderableObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ShadowMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\ShadowMenu.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Text.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Text.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoEffect.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VideoEffect.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -4,7 +4,6 @@
 
 class CAction;
 class CGame;
-class CQuad;
 
 class CDefaultGameState :
 	public CGameState
@@ -14,6 +13,7 @@ public:
 	virtual ~CDefaultGameState(void);
 	
 	static CDefaultGameState* GetInstance();
+
 	virtual void Enter(CGame *);
 	virtual bool Execute(CGame *);
 	virtual void Exit(CGame *);

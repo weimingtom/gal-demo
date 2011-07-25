@@ -398,6 +398,18 @@
 				RelativePath=".\MenuAction.h"
 				>
 			</File>
+			<Filter
+				Name="Script"
+				>
+				<File
+					RelativePath=".\lexrule.l"
+					>
+				</File>
+				<File
+					RelativePath=".\yaccrule.y"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="State"

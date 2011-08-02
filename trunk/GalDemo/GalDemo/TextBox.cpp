@@ -58,7 +58,8 @@ void CTextBox::Render()
 	HGE *hge = hgeCreate(HGE_VERSION);
 	
 	float totalWidth = m_text[m_curLine].GetWidth();
-	hge->Gfx_SetClipping(m_left, m_top + (5 + m_textHeight) * m_curLine, totalWidth * m_progress, m_textHeight + 5);
+	hge->Gfx_SetClipping(m_left, m_top + (5 + m_textHeight) * m_curLine, 
+		totalWidth * m_progress > 0 ? totalWidth * m_progress : 1 , m_textHeight + 5);
 	m_text[m_curLine].Render();
 	hge->Gfx_SetClipping();
 	hge->Release();

@@ -132,3 +132,29 @@ void CQuad::GetZ( float z[4] )
 		z[i] = m_quad.v[i].z;
 	}
 }
+
+FPOINT CQuad::GetTopLeft()
+{
+	return FPOINT(m_quad.v[0].x, m_quad.v[0].y);
+}
+
+void CQuad::SetTopLeft( FPOINT point )
+{
+	float width = GetWidth();
+	float height = GetHeight();
+
+	m_quad.v[0].x = point.x; m_quad.v[0].y  = point.y;
+	m_quad.v[1].x = point.x + width; m_quad.v[1].y  = point.y;
+	m_quad.v[2].x = point.x + width; m_quad.v[2].y  = point.y + height;
+	m_quad.v[3].x = point.x; m_quad.v[3].y  = point.y + height;
+}
+
+float CQuad::GetWidth()
+{
+	return m_quad.v[1].x - m_quad.v[0].x;
+}
+
+float CQuad::GetHeight()
+{
+	return m_quad.v[2].y - m_quad.v[1].y;
+}

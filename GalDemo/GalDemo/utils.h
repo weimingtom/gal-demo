@@ -1,5 +1,5 @@
 #pragma once
-
+#include <cstdio>
 class FPOINT
 {
 public:
@@ -42,4 +42,17 @@ inline FPOINT operator +(FPOINT p1, FPOINT p2)
 inline FPOINT operator -(FPOINT p1, FPOINT p2)
 {
 	return FPOINT(p1.x - p2.x, p1.y - p2.y);
+}
+
+inline void DebugMsg(char *szFormat, ...)
+{
+	char szInfo[512];
+	va_list ArgumentList;
+
+	va_start(ArgumentList, szFormat); 
+	vsprintf(szInfo, szFormat, ArgumentList);
+	va_end(ArgumentList);
+#ifdef _DEBUG
+	OutputDebugString(szInfo);
+#endif
 }

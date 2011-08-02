@@ -21,6 +21,12 @@ public:
 
 	void SetPosition(FPOINT pos[4]);
 	void GetPosition(FPOINT pos[4]);
+	
+	void SetTopLeft(FPOINT point);
+	FPOINT GetTopLeft();
+
+	float GetWidth();
+	float GetHeight();
 
 	void SetColor(int color[4]);
 	void GetColor(int color[4]);

@@ -4,7 +4,7 @@
 #include "ShadowMenu.h"
 #include "Quad.h"
 #include "Text.h"
-#include "DefaultGameState.h"
+#include "GameMain.h"
 #include "Game.h"
 #include "GameFSM.h"
 #include "gui.h"
@@ -78,7 +78,7 @@ bool CGameTile::Execute( CGame * game )
 
 	if (result == 133)
 	{
-		game->GetFSM()->ChangeState(CDefaultGameState::GetInstance());
+		game->GetFSM()->ChangeState(CGameMain::GetInstance());
 	}
 	return false;
 }

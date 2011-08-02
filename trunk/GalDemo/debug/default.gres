@@ -12,3 +12,8 @@ Texture cursor
 {
 	filename=res\pic\cursor.png
 }
+
+Texture textbox
+{
+	filename=res\pic\textbox.png
+}

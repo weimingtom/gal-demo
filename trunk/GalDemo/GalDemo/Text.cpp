@@ -40,6 +40,11 @@ void CText::SetColor( DWORD color)
 
 void CText::SetText( LPCWSTR text)
 {
+	if (m_text)
+	{
+		delete[] m_text;
+		m_text = NULL;
+	}
 	if (text)
 	{
 		unsigned int size = wcslen(text) + 1;

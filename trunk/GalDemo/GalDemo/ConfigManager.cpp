@@ -75,3 +75,8 @@ std::string CConfigManager::GetSystenFont()
 	GetPrivateProfileString(m_section.c_str(), FONT_PATH, "font", font, 256 * sizeof(char), m_configFileName.c_str());
 	return font;
 }
+
+int CConfigManager::GetFontSize()
+{
+	return GetPrivateProfileInt(m_section.c_str(), FONT_SIZE, 20, m_configFileName.c_str());
+}

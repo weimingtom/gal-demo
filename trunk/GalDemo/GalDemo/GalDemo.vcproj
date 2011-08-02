@@ -24,6 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -402,7 +403,51 @@
 				Name="Script"
 				>
 				<File
+					RelativePath=".\grammar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\grammar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\GrammarNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GrammarNode.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Interpreter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Interpreter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\lex.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\lex.h"
+					>
+				</File>
+				<File
 					RelativePath=".\lexrule.l"
+					>
+				</File>
+				<File
+					RelativePath=".\parser.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SyntaxTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SyntaxTable.h"
 					>
 				</File>
 				<File
@@ -420,6 +465,14 @@
 			</File>
 			<File
 				RelativePath=".\DefaultGameState.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GameMain.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GameMain.h"
 				>
 			</File>
 			<File
@@ -496,6 +549,14 @@
 			</File>
 			<File
 				RelativePath=".\Text.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TextBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TextBox.h"
 				>
 			</File>
 			<File

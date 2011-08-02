@@ -20,6 +20,7 @@ public:
 	std::string GetWindowTitle();
 	std::string	GetLogFileName();
 	std::string	GetSystenFont();
+	int			GetFontSize();
 
 private:
 	std::string					m_configFileName;

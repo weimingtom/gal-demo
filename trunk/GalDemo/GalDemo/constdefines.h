@@ -8,6 +8,7 @@
 #define WINDOW_TITLE			"WinodwTitle"
 #define LOG_FILE				"LogFile"
 #define FONT_PATH				"Font"
+#define FONT_SIZE				"FontSize"
 
 #define CfgMgr					CConfigManager::GetInstance()
 #define ResMgr					CResourceManager::GetInstance()

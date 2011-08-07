@@ -8,7 +8,7 @@ CSyntaxTable::CSyntaxTable(void)
 
 CSyntaxTable::~CSyntaxTable(void)
 {
-	m_syntaxArray.clear();
+	Destroy();
 }
 
 unsigned int CSyntaxTable::FindSyntax( const char *name )
@@ -53,9 +53,18 @@ char* CSyntaxTable::ConstructName()
 
 SYNTAX_NODE & CSyntaxTable::GetSyntax( int index )
 {
+	assert(index < m_syntaxArray.size());
 	return m_syntaxArray[index];
 }
 
+void CSyntaxTable::Destroy()
+{
+	for (std::vector<SYNTAX_NODE>::iterator iter = m_syntaxArray.begin(); iter != m_syntaxArray.end(); iter++)
+	{
+		delete[] iter->name;
+	}
+	m_syntaxArray.clear();
+}
 bool operator <(const SYNTAX_VALUE& value1, const SYNTAX_VALUE& value2)
 {
 	bool ret;
@@ -188,7 +197,7 @@ SYNTAX_VALUE& SYNTAX_VALUE::operator=( const SYNTAX_VALUE& value )
 		this->Vun.strVal = new char[strlen(value.Vun.strVal) + 1];
 		memcpy(this->Vun.strVal, value.Vun.strVal, strlen(value.Vun.strVal) + 1);
 	}
-	else
+	else if(value.type == SYNTAX_INT)
 	{
 		this->type = SYNTAX_INT;
 		this->Vun.intVal = value.Vun.intVal;

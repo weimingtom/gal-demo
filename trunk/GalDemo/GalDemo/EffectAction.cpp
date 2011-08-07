@@ -24,6 +24,8 @@ int CEffectAction::execute( CGameState * state)
 		state->RemoveObject(m_object->GetID());
 		int id = m_object->GetID();
 		delete m_object;
+		state->PopAction();
+		delete this;
 		return id;
 	}
 	else

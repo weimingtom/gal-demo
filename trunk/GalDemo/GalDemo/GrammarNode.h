@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 enum _grammar_node_type_
 {
@@ -33,9 +34,14 @@ public:
 	CGrammarNode*	GetChild(int i){return m_childs[i];}
 	int				GetType(){return m_type;}
 	int				GetSyntaxIndex(){return m_syntaxIndex;}
-
+	
+	static void RegisterKeyWord(const char **, int);
+	static void RegisterKeyWord(std::vector<const char*> words){keywords = words;}
 private:
+	bool		check();
+
 	CGrammarNode*		m_childs[MAX_CHILD_NUM];
 	int					m_type;
 	int					m_syntaxIndex;
+	static std::vector<const char *> keywords;
 };

@@ -6,7 +6,7 @@
 
 class CGrammarNode;
 
-#include "grammar.h"
+#include "Grammar.h"
 
 #define isatty _isatty
 
@@ -44,6 +44,7 @@ INTEGER		{DIGIT}+
 "-"					{return MINUS;}
 "#"					{IgnoreLine();}
 ";"					{return END_STMT;}
+","					{return COMMA;}
 "\n"				{lineno++;}
 {INTEGER}			{HandleInteger();return INT;}
 {IDENTIFIER}		{HandleIdentifer(); return ID;}

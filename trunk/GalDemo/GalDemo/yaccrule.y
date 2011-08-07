@@ -20,7 +20,7 @@ void yyerror(char *msg);
 
 %token IF ELSE OPEN_PARAM CLOSE_PARAM OPEN_STMT CLOSE_STMT END_STMT
 %token LT GT EQ PLUS MINUS
-%token ASSIGN
+%token ASSIGN COMMA
 %token ERROR_TOKEN 
 %token <strVal> ID STR
 %token <intVal> INT
@@ -60,7 +60,7 @@ call_func
 	;
 
 param_list
-	:param_list ',' simple_expression						{$$ = new CGrammarNode(PARAM_LIST, $1, $3);}
+	:param_list COMMA simple_expression						{$$ = new CGrammarNode(PARAM_LIST, $1, $3);}
 	|simple_expression										{$$ = new CGrammarNode(PARAM_LIST, $1);}
 	;	
 
@@ -98,6 +98,7 @@ assign_expression
 	|identifier ASSIGN eq_expression				{$$ = new CGrammarNode(ASSIGN_NODE, $1, $3);}
 	|identifier ASSIGN gt_expression				{$$ = new CGrammarNode(ASSIGN_NODE, $1, $3);}
 	|identifier ASSIGN lt_expression				{$$ = new CGrammarNode(ASSIGN_NODE, $1, $3);}
+	|identifier ASSIGN call_func					{$$ = new CGrammarNode(ASSIGN_NODE, $1, $3);}
 	;
 
 eq_expression

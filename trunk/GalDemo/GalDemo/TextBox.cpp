@@ -10,7 +10,7 @@ CTextBox::CTextBox(CQuad *quad, float delay, int id)
 , m_backGround(quad)
 , m_timer(0)
 , m_progress(0)
-, m_curLine(0)
+, m_curLine(-1)
 , m_num(0)
 {
 	CText t;
@@ -28,12 +28,12 @@ CTextBox::CTextBox(CQuad *quad, float delay, int id)
 
 	m_text = new CText[MAX_LINE_NUM];
 	FPOINT point = quad->GetTopLeft();
-	m_left = point.x + 15;
+	m_left = point.x + LEFT_SPACING;
 	m_top = point.y;
 	for (int i = 0; i < MAX_LINE_NUM; i++)
 	{
 		m_text[i].LoadFont(CfgMgr->GetSystenFont().c_str(), CfgMgr->GetFontSize());
-		m_text[i].SetPos(m_left, m_top + (5 + m_textHeight) * i);
+		m_text[i].SetPos(m_left, m_top + (LINE_SPACING + m_textHeight) * i);
 		m_text[i].SetText(L"");
 		if (!m_text[i].IsLoaded())
 		{
@@ -50,16 +50,31 @@ CTextBox::~CTextBox(void)
 
 void CTextBox::Render()
 {
+	
 	m_backGround->Render();
+	
+	if (m_curLine == -1)
+	{
+		return ;
+	}
+
+	//render the finished line
 	for (int i = 0; i < m_curLine; i++)
 	{
 		m_text[i].Render();
 	}
+
 	HGE *hge = hgeCreate(HGE_VERSION);
+
+	//then render the current line
+	float textWidth = m_text[m_curLine].GetWidth();
+	float totalWidth = m_backGround->GetWidth() - 2 * LEFT_SPACING;
 	
-	float totalWidth = m_text[m_curLine].GetWidth();
-	hge->Gfx_SetClipping(m_left, m_top + (5 + m_textHeight) * m_curLine, 
-		totalWidth * m_progress > 0 ? totalWidth * m_progress : 1 , m_textHeight + 5);
+	float len = textWidth * m_progress > 1 ? textWidth * m_progress : 1;
+	
+	hge->Gfx_SetClipping(m_left, m_top + (LINE_SPACING + m_textHeight) * m_curLine, 
+		len, m_textHeight + 5);
+	
 	m_text[m_curLine].Render();
 	hge->Gfx_SetClipping();
 	hge->Release();
@@ -67,7 +82,7 @@ void CTextBox::Render()
 
 int CTextBox::Update( float dt )
 {
-	if (m_curLine == m_num - 1)
+	if (m_curLine == m_num)
 	{
 		return m_ID;
 	}
@@ -89,7 +104,7 @@ int CTextBox::Update( float dt )
 
 void CTextBox::ClearText()
 {
-	m_curLine = 0;
+	m_curLine = -1;
 	m_num = 0;
 	for (int i = 0; i < MAX_LINE_NUM; i++)
 	{
@@ -104,9 +119,7 @@ void CTextBox::SetText(const wchar_t *text )
 	m_curLine = 0;
 	m_num = 0;
 
-	FPOINT p[4];
-	m_backGround->GetPosition(p);
-	float width = p[1].x - p[0].x - 30;
+	float width = m_backGround->GetWidth() - 4 * LEFT_SPACING;
 	
 	int len = wcslen(text);
 	int num = width / m_textWidth;
@@ -136,4 +149,16 @@ void CTextBox::SetText(const wchar_t *text )
 	}
 	
 	delete[] buff;
+}
+
+void CTextBox::SpeedUpLine()
+{
+	m_timer = m_delay;
+}
+
+void CTextBox::SpeedUpAll()
+{
+	m_curLine = m_num;
+	m_progress = 1;
+	m_timer = 0;
 }

@@ -50,6 +50,7 @@ public:
 	SYNTAX_NODE &GetSyntax(int index);
 	unsigned int	GetCount(){return m_syntaxArray.size();}
 	char* ConstructName();
+	void Destroy();
 private:
 	std::vector<SYNTAX_NODE>		m_syntaxArray;
 };

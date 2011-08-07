@@ -17,10 +17,11 @@ typedef union
 #define	PLUS	268
 #define	MINUS	269
 #define	ASSIGN	270
-#define	ERROR_TOKEN	271
-#define	ID	272
-#define	STR	273
-#define	INT	274
+#define	COMMA	271
+#define	ERROR_TOKEN	272
+#define	ID	273
+#define	STR	274
+#define	INT	275
 
 
 extern YYSTYPE yylval;

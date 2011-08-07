@@ -8,6 +8,8 @@ class CTextBox :
 	public CRenderableObject
 {
 	static const int MAX_LINE_NUM = 3;
+	static const int LINE_SPACING = 5;
+	static const int LEFT_SPACING = 15;
 public:
 	CTextBox(CQuad *quad, float delay, int id);
 	virtual ~CTextBox(void);
@@ -17,6 +19,9 @@ public:
 
 	void SetText(const wchar_t *text);
 	void ClearText();
+	
+	void SpeedUpLine();
+	void SpeedUpAll();
 
 protected:
 	bool		m_isShow;

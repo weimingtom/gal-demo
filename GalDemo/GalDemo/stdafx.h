@@ -7,3 +7,7 @@
 #include "ResourceManager.h"
 #include "ConfigManager.h"
 #include "IDdefines.h"
+
+#ifdef _DEBUG
+	#include "debug.h"
+#endif // _DEBUG

@@ -17,10 +17,11 @@
 #define	PLUS	268
 #define	MINUS	269
 #define	ASSIGN	270
-#define	ERROR_TOKEN	271
-#define	ID	272
-#define	STR	273
-#define	INT	274
+#define	COMMA	271
+#define	ERROR_TOKEN	272
+#define	ID	273
+#define	STR	274
+#define	INT	275
 
 #line 1 "..\yaccrule.y"
 
@@ -69,18 +70,18 @@ typedef
 
 
 
-#define	YYFINAL		64
+#define	YYFINAL		66
 #define	YYFLAG		-32768
 #define	YYNTBASE	21
 
-#define YYTRANSLATE(x) ((unsigned)(x) <= 274 ? yytranslate[x] : 40)
+#define YYTRANSLATE(x) ((unsigned)(x) <= 275 ? yytranslate[x] : 40)
 
 static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     2,     2,     2,    20,     2,     2,     2,     2,     2,     2,
+     2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -103,7 +104,7 @@ static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     1,     2,     3,     4,     5,
      6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
-    16,    17,    18,    19
+    16,    17,    18,    19,    20
 };
 
 #if YYDEBUG != 0
@@ -111,22 +112,23 @@ static const short yyprhs[] = {     0,
      0,     3,     4,     7,     9,    12,    15,    19,    22,    24,
     29,    33,    37,    39,    46,    49,    50,    52,    54,    56,
     58,    60,    64,    68,    72,    76,    80,    84,    88,    92,
-    96,   100,   104,   106,   108,   110,   114,   116,   118
+    96,   100,   104,   108,   110,   112,   114,   118,   120,   122
 };
 
 static const short yyrhs[] = {    21,
     22,     0,     0,    25,     9,     0,    27,     0,    30,     9,
      0,     1,     9,     0,     7,    24,     8,     0,    24,    22,
      0,    22,     0,    39,     5,    26,     6,     0,    39,     5,
-     6,     0,    26,    20,    36,     0,    36,     0,     3,     5,
+     6,     0,    26,    16,    36,     0,    36,     0,     3,     5,
     29,     6,    23,    28,     0,     4,    23,     0,     0,    31,
      0,    35,     0,    34,     0,    32,     0,    33,     0,    39,
     15,    36,     0,    39,    15,    35,     0,    39,    15,    34,
      0,    39,    15,    31,     0,    39,    15,    32,     0,    39,
-    15,    33,     0,    36,    12,    36,     0,    36,    11,    36,
-     0,    36,    10,    36,     0,    36,    14,    36,     0,    36,
-    13,    36,     0,    39,     0,    38,     0,    37,     0,     5,
-    36,     6,     0,    19,     0,    18,     0,    17,     0
+    15,    33,     0,    39,    15,    25,     0,    36,    12,    36,
+     0,    36,    11,    36,     0,    36,    10,    36,     0,    36,
+    14,    36,     0,    36,    13,    36,     0,    39,     0,    38,
+     0,    37,     0,     5,    36,     6,     0,    20,     0,    19,
+     0,    18,     0
 };
 
 #endif
@@ -135,13 +137,13 @@ static const short yyrhs[] = {    21,
 static const short yyrline[] = { 0,
     37,    38,    42,    43,    44,    45,    49,    53,    54,    58,
     59,    63,    64,    68,    82,    83,    87,    88,    89,    90,
-    91,    95,    96,    97,    98,    99,   100,   104,   108,   112,
-   116,   120,   124,   125,   126,   127,   131,   142,   153
+    91,    95,    96,    97,    98,    99,   100,   101,   105,   109,
+   113,   117,   121,   125,   126,   127,   128,   132,   143,   154
 };
 
 static const char * const yytname[] = {   "$","error","$undefined.","IF","ELSE",
 "OPEN_PARAM","CLOSE_PARAM","OPEN_STMT","CLOSE_STMT","END_STMT","LT","GT","EQ",
-"PLUS","MINUS","ASSIGN","ERROR_TOKEN","ID","STR","INT","','","program","statement",
+"PLUS","MINUS","ASSIGN","COMMA","ERROR_TOKEN","ID","STR","INT","program","statement",
 "statement_block","statement_list","call_func","param_list","if_statement","else_statement",
 "expression","assign_expression","eq_expression","gt_expression","lt_expression",
 "minus_expression","plus_expression","simple_expression","const_int","const_string",
@@ -152,67 +154,69 @@ static const char * const yytname[] = {   "$","error","$undefined.","IF","ELSE",
 static const short yyr1[] = {     0,
     21,    21,    22,    22,    22,    22,    23,    24,    24,    25,
     25,    26,    26,    27,    28,    28,    29,    29,    29,    29,
-    29,    30,    30,    30,    30,    30,    30,    31,    32,    33,
-    34,    35,    36,    36,    36,    36,    37,    38,    39
+    29,    30,    30,    30,    30,    30,    30,    30,    31,    32,
+    33,    34,    35,    36,    36,    36,    36,    37,    38,    39
 };
 
 static const short yyr2[] = {     0,
      2,     0,     2,     1,     2,     2,     3,     2,     1,     4,
      3,     3,     1,     6,     2,     0,     1,     1,     1,     1,
      1,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-     3,     3,     1,     1,     1,     3,     1,     1,     1
+     3,     3,     3,     1,     1,     1,     3,     1,     1,     1
 };
 
 static const short yydefact[] = {     2,
-     0,     0,     0,    39,     1,     0,     4,     0,     0,     6,
-     0,     3,     5,     0,     0,     0,    38,    37,     0,    17,
-    20,    21,    19,    18,     0,    35,    34,    33,    11,     0,
-    13,    25,    26,    27,    24,    23,    22,     0,     0,     0,
-     0,     0,     0,     0,    10,     0,    36,     0,    16,    30,
-    29,    28,    32,    31,    12,     9,     0,     0,    14,     7,
-     8,    15,     0,     0
+     0,     0,     0,    40,     1,     0,     4,     0,     0,     6,
+     0,     3,     5,     0,     0,     0,    39,    38,     0,    17,
+    20,    21,    19,    18,     0,    36,    35,    34,    11,     0,
+    13,    28,    25,    26,    27,    24,    23,    22,    34,     0,
+     0,     0,     0,     0,     0,     0,    10,     0,    37,     0,
+    16,    31,    30,    29,    33,    32,    12,     9,     0,     0,
+    14,     7,     8,    15,     0,     0
 };
 
 static const short yydefgoto[] = {     1,
-     5,    49,    57,     6,    30,     7,    59,    19,     8,    20,
+     5,    51,    59,     6,    30,     7,    61,    19,     8,    20,
     21,    22,    23,    24,    25,    26,    27,    28
 };
 
 static const short yypact[] = {-32768,
-     4,     3,     9,-32768,-32768,     6,-32768,     7,    29,-32768,
-    21,-32768,-32768,    18,    21,    21,-32768,-32768,    11,-32768,
--32768,-32768,-32768,-32768,    38,-32768,-32768,-32768,-32768,    12,
--32768,-32768,-32768,-32768,-32768,-32768,    38,    14,    34,    21,
-    21,    21,    21,    21,-32768,    21,-32768,     8,    39,-32768,
--32768,-32768,-32768,-32768,-32768,-32768,     5,    34,-32768,-32768,
--32768,-32768,    42,-32768
+     4,     3,    10,-32768,-32768,     7,-32768,    11,    13,-32768,
+    22,-32768,-32768,    19,    22,    22,-32768,-32768,    15,-32768,
+-32768,-32768,-32768,-32768,    40,-32768,-32768,-32768,-32768,    28,
+-32768,-32768,-32768,-32768,-32768,-32768,-32768,    40,    12,    30,
+    36,    22,    22,    22,    22,    22,-32768,    22,-32768,     8,
+    41,-32768,-32768,-32768,-32768,-32768,-32768,-32768,     5,    36,
+-32768,-32768,-32768,-32768,    46,-32768
 };
 
 static const short yypgoto[] = {-32768,
-   -38,   -12,-32768,-32768,-32768,-32768,-32768,-32768,-32768,    30,
-    40,    43,    44,    45,   -13,-32768,-32768,    -1
+   -40,   -12,-32768,    32,-32768,-32768,-32768,-32768,-32768,    42,
+    44,    45,    47,    48,   -13,-32768,-32768,    -1
 };
 
 
-#define	YYLAST		60
+#define	YYLAST		63
 
 
 static const short yytable[] = {     9,
-    31,    37,    38,    63,     2,     2,     3,     3,     2,    56,
-     3,    10,    60,    11,    12,    13,    39,    45,    61,    47,
-     4,     4,    16,    29,     4,    16,    50,    51,    52,    53,
-    54,    46,    55,    14,     4,    17,    18,     4,    17,    18,
-    48,    64,    58,    15,    32,    62,     9,    40,    41,    42,
-    43,    44,     0,     0,    33,     9,     0,    34,    35,    36
+    31,    38,    40,    65,     2,     2,     3,     3,     2,    58,
+     3,    10,    62,    39,    11,    12,    14,    14,    63,    13,
+    41,     4,     4,    16,    29,     4,    16,    15,    52,    53,
+    54,    55,    56,    47,    57,    49,     4,    17,    18,     4,
+    17,    18,    50,    48,    60,    66,    32,    64,     9,    42,
+    43,    44,    45,    46,     0,     0,    33,     9,    34,    35,
+     0,    36,    37
 };
 
 static const short yycheck[] = {     1,
-    14,    15,    16,     0,     1,     1,     3,     3,     1,    48,
-     3,     9,     8,     5,     9,     9,     6,     6,    57,     6,
-    17,    17,     5,     6,    17,     5,    40,    41,    42,    43,
-    44,    20,    46,     5,    17,    18,    19,    17,    18,    19,
-     7,     0,     4,    15,    15,    58,    48,    10,    11,    12,
-    13,    14,    -1,    -1,    15,    57,    -1,    15,    15,    15
+    14,    15,    16,     0,     1,     1,     3,     3,     1,    50,
+     3,     9,     8,    15,     5,     9,     5,     5,    59,     9,
+     6,    18,    18,     5,     6,    18,     5,    15,    42,    43,
+    44,    45,    46,     6,    48,     6,    18,    19,    20,    18,
+    19,    20,     7,    16,     4,     0,    15,    60,    50,    10,
+    11,    12,    13,    14,    -1,    -1,    15,    59,    15,    15,
+    -1,    15,    15
 };
 /* -*-C-*-  Note some compilers choke on comments on `#line' lines.  */
 #line 3 "/usr/local/share/bison.simple"
@@ -871,28 +875,28 @@ case 27:
 {yyval.nodeVal = new CGrammarNode(ASSIGN_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 28:
-#line 104 "..\yaccrule.y"
-{yyval.nodeVal = new CGrammarNode(EQ_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
+#line 101 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(ASSIGN_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 29:
-#line 108 "..\yaccrule.y"
-{yyval.nodeVal = new CGrammarNode(GT_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
+#line 105 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(EQ_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 30:
-#line 112 "..\yaccrule.y"
-{yyval.nodeVal = new CGrammarNode(LT_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
+#line 109 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(GT_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 31:
-#line 116 "..\yaccrule.y"
-{yyval.nodeVal = new CGrammarNode(MINUS_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
+#line 113 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(LT_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 32:
-#line 120 "..\yaccrule.y"
-{yyval.nodeVal = new CGrammarNode(PLUS_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
+#line 117 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(MINUS_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 33:
-#line 124 "..\yaccrule.y"
-{yyval.nodeVal = yyvsp[0].nodeVal;;
+#line 121 "..\yaccrule.y"
+{yyval.nodeVal = new CGrammarNode(PLUS_NODE, yyvsp[-2].nodeVal, yyvsp[0].nodeVal);;
     break;}
 case 34:
 #line 125 "..\yaccrule.y"
@@ -904,10 +908,14 @@ case 35:
     break;}
 case 36:
 #line 127 "..\yaccrule.y"
-{yyval.nodeVal = yyvsp[-1].nodeVal;;
+{yyval.nodeVal = yyvsp[0].nodeVal;;
     break;}
 case 37:
-#line 132 "..\yaccrule.y"
+#line 128 "..\yaccrule.y"
+{yyval.nodeVal = yyvsp[-1].nodeVal;;
+    break;}
+case 38:
+#line 133 "..\yaccrule.y"
 {
 		SYNTAX_VALUE value;
 		value.type = SYNTAX_INT;
@@ -916,8 +924,8 @@ case 37:
 		yyval.nodeVal = new CGrammarNode(CONST_INT_NODE, index);
 	;
     break;}
-case 38:
-#line 143 "..\yaccrule.y"
+case 39:
+#line 144 "..\yaccrule.y"
 {
 		SYNTAX_VALUE value;
 		value.type = SYNTAX_STR;
@@ -926,8 +934,8 @@ case 38:
 		yyval.nodeVal = new CGrammarNode(CONST_STR_NODE, index);
 	;
     break;}
-case 39:
-#line 154 "..\yaccrule.y"
+case 40:
+#line 155 "..\yaccrule.y"
 {
 		int exist = syntaxTable.FindSyntax(yyvsp[0].strVal);
 		if(exist != -1)
@@ -1165,7 +1173,7 @@ yyerrhandle:
     }
   return 1;
 }
-#line 170 "..\yaccrule.y"
+#line 171 "..\yaccrule.y"
 
 
 void yyerror(char *msg) {

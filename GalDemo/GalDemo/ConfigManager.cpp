@@ -56,7 +56,7 @@ std::string CConfigManager::GetWindowTitle()
 {
 	char title[256];
 	ZeroMemory(title, 256 * sizeof(char));
-	GetPrivateProfileString(m_section.c_str(), WINDOW_TITLE, "GalDefault", title, 256 * sizeof(char), m_configFileName.c_str());
+	GetPrivateProfileString(m_section.c_str(), WINDOW_TITLE, "GameDefault", title, 256 * sizeof(char), m_configFileName.c_str());
 	return title;
 }
 
@@ -64,7 +64,7 @@ std::string CConfigManager::GetLogFileName()
 {
 	char name[256];
 	ZeroMemory(name, 256 * sizeof(char));
-	GetPrivateProfileString(m_section.c_str(), LOG_FILE, "GalDefault", name, 256 * sizeof(char), m_configFileName.c_str());
+	GetPrivateProfileString(m_section.c_str(), LOG_FILE, "GameDefault", name, 256 * sizeof(char), m_configFileName.c_str());
 	return name;
 }
 

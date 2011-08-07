@@ -54,7 +54,6 @@ bool CGame::Initialize()
 		return false;
 	}
 	m_over = false;
-
 	return true;
 }
 

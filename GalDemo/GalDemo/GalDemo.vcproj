@@ -223,6 +223,14 @@
 				RelativePath=".\stdafx.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\TextAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\VM.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Í·ÎÄ¼þ"
@@ -242,11 +250,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Game.h"
+				RelativePath=".\debug.h"
 				>
 			</File>
 			<File
-				RelativePath=".\GameDefaultAction.h"
+				RelativePath=".\Game.h"
 				>
 			</File>
 			<File
@@ -282,7 +290,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TextAction.h"
+				>
+			</File>
+			<File
 				RelativePath=".\utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\VM.h"
 				>
 			</File>
 		</Filter>
@@ -301,6 +317,10 @@
 			</File>
 			<File
 				RelativePath="..\debug\default.gres"
+				>
+			</File>
+			<File
+				RelativePath="..\debug\script\start.gscr"
 				>
 			</File>
 		</Filter>
@@ -388,10 +408,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GameDefaultAction.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MenuAction.cpp"
 				>
 			</File>
@@ -459,14 +475,6 @@
 		<Filter
 			Name="State"
 			>
-			<File
-				RelativePath=".\DefaultGameState.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\DefaultGameState.h"
-				>
-			</File>
 			<File
 				RelativePath=".\GameMain.cpp"
 				>

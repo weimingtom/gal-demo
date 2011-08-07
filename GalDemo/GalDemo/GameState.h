@@ -96,6 +96,8 @@ public:
 		}
 		return NULL;
 	}
+	CAction *GetTopAction(){return m_actionStack.top();}
+	void PopAction(){m_actionStack.pop();}
 
 protected:
 	std::set<CRenderableObject *>	m_renderGroup[MAX_GROUP_NUM];

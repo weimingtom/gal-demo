@@ -29,7 +29,7 @@ CTextBox::CTextBox(CQuad *quad, float delay, int id)
 	m_text = new CText[MAX_LINE_NUM];
 	FPOINT point = quad->GetTopLeft();
 	m_left = point.x + LEFT_SPACING;
-	m_top = point.y;
+	m_top = point.y + LINE_SPACING;
 	for (int i = 0; i < MAX_LINE_NUM; i++)
 	{
 		m_text[i].LoadFont(CfgMgr->GetSystenFont().c_str(), CfgMgr->GetFontSize());
@@ -51,6 +51,11 @@ CTextBox::~CTextBox(void)
 void CTextBox::Render()
 {
 	
+	if (!m_isShow)
+	{
+		return;
+	}
+
 	m_backGround->Render();
 	
 	if (m_curLine == -1)
@@ -62,6 +67,11 @@ void CTextBox::Render()
 	for (int i = 0; i < m_curLine; i++)
 	{
 		m_text[i].Render();
+	}
+	
+	if (m_curLine == m_num)
+	{
+		return;
 	}
 
 	HGE *hge = hgeCreate(HGE_VERSION);
@@ -119,7 +129,7 @@ void CTextBox::SetText(const wchar_t *text )
 	m_curLine = 0;
 	m_num = 0;
 
-	float width = m_backGround->GetWidth() - 4 * LEFT_SPACING;
+	float width = m_backGround->GetWidth() - 3 * LEFT_SPACING;
 	
 	int len = wcslen(text);
 	int num = width / m_textWidth;

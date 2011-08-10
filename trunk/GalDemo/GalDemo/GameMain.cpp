@@ -35,9 +35,18 @@ CGameMain* CGameMain::GetInstance()
 
 void CGameMain::Enter( CGame * )
 {
-	CQuad * bg = new CQuad(ResMgr->GetTexture(RES_TEXTURE_TEXTBOX));
-	bg->SetTopLeft(FPOINT(0, 280));
-	m_textbox = new CTextBox(bg, 2, ID_MAIN_TEXTBOX);
+	
+	CQuad * textbg = new CQuad(ResMgr->GetTexture(RES_TEXTURE_TEXTBOX));
+	textbg->SetTopLeft(FPOINT(0, 380));
+	int bgcol[4] = {0x80ffffff, 0x20ffffff, 0x20ffffff, 0x80ffffff};
+	textbg->SetColor(bgcol);
+	FPOINT v[4];
+	v[0].x = 0.0; v[0].y = 0.0;
+	v[1].x = 1.0; v[1].y = 0.0;
+	v[2].x = 1.0; v[2].y = 0.5;
+	v[3].x = 0.0; v[3].y = 0.5;
+	textbg->SetVertex(v);
+	m_textbox = new CTextBox(textbg, 2, ID_MAIN_TEXTBOX);
 	
 	m_renderGroup[1].insert(m_textbox);
 	m_actionStack.push(new CTextAction(m_textbox));
@@ -84,7 +93,7 @@ void CGameMain::Exit( CGame * )
 bool CGameMain::Render()
 {
 	m_hge->Gfx_BeginScene();
-	m_hge->Gfx_Clear(0);
+	m_hge->Gfx_Clear(0xffffff00);
 	RenderAllObject();
 	m_hge->Gfx_EndScene();
 	return false;

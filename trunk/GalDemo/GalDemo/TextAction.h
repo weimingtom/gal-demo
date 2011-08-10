@@ -15,4 +15,5 @@ public:
 
 private:
 	CTextBox *m_textbox;
+	bool	  m_showText;
 };

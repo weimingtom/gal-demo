@@ -9,7 +9,7 @@ class CTextBox :
 {
 	static const int MAX_LINE_NUM = 3;
 	static const int LINE_SPACING = 5;
-	static const int LEFT_SPACING = 15;
+	static const int LEFT_SPACING = 40;
 public:
 	CTextBox(CQuad *quad, float delay, int id);
 	virtual ~CTextBox(void);
@@ -22,6 +22,8 @@ public:
 	
 	void SpeedUpLine();
 	void SpeedUpAll();
+	
+	void Show(bool b){m_isShow = b;}
 
 protected:
 	bool		m_isShow;

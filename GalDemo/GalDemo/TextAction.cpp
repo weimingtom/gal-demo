@@ -4,6 +4,7 @@
 
 CTextAction::CTextAction(CTextBox *textbox)
 : m_textbox(textbox)
+, m_showText(true)
 {
 }
 
@@ -18,12 +19,18 @@ int CTextAction::execute( CGameState * )
 	int ret = m_textbox->Update(dt);
 	//DebugMsg("textbox ret: %d\n", ret);
 	bool lbtndown = hge->Input_KeyDown(HGEK_LBUTTON);
+	bool spacedown = hge->Input_KeyDown(HGEK_SPACE);
 
 	if (ret > 0)
 	{
-		if (lbtndown)
+		if (m_showText && lbtndown)
 		{
 			return m_textbox->GetID();
+		}
+		if (spacedown)
+		{
+			m_showText = !m_showText;
+			m_textbox->Show(m_showText);
 		}
 	}
 	else
